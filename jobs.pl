@@ -3,8 +3,12 @@ use warnings;
 
 use 5.18.1;
 
-my @classes;
-my %classes;
+chomp(my @lines = <STDIN>);
+
+use Data::Dumper;
+print Dumper \@lines;
+
+__END__
 
 while (<STDIN>) {
   chomp;
@@ -20,6 +24,9 @@ while (<STDIN>) {
 #    $classes{$class}++;
   }
 }
+
+my @classes;
+my %classes;
 
 use Data::Dumper;
 print Dumper \@classes;
