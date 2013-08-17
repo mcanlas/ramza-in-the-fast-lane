@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use 5.18.1;
+use 5.10.0;
 
 my @points;
 
