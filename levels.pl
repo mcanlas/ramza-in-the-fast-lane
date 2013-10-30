@@ -16,4 +16,4 @@ while (<STDIN>) {
 }
 
 $" = ', ';
-say "[@points]";
+say "(@points)";
