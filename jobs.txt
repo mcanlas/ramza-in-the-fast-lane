@@ -1,22 +1,22 @@
-Squire
-Knight, Squire 2
-Monk, Knight 3
-Geomancer, Monk 4
-Archer, Squire 2
-Thief, Archer 3
-Dragoon, Thief 4
-Ninja, Archer 4, Thief 5, Geomancer 2
-Samurai, Knight 4, Monk 5, Dragoon 2
-Dancer, Geomancer 5, Dragoon 5
-Chemist
-Priest, Chemist 2
-Wizard, Chemist 2
-Mystic, Priest 3
-Time Mage, Wizard 3
-Arithmetician, Priest 5, Wizard 5, Mystic 3, Time Mage 3
-Orator, Mystic 3
-Summoner, Time Mage 3
-Bard, Orator 5, Summoner 5
-Onion Knight, Squire 6, Chemist 6
-Mime, Squire 8, Chemist 8, Geomancer 5, Dragoon 5, Summoner 5, Orator 5
-Dark Knight, Squire 8, Chemist 8, Knight *, Wizard *, Ninja 8, Geomancer 8, Dragoon 8, Samurai 8
+1, Squire
+3, Knight, Squire 2
+7, Monk, Knight 3
+11, Geomancer, Monk 4
+4, Archer, Squire 2
+8, Thief, Archer 3
+12, Dragoon, Thief 4
+15, Ninja, Archer 4, Thief 5, Geomancer 2
+16, Samurai, Knight 4, Monk 5, Dragoon 2
+18, Dancer, Geomancer 5, Dragoon 5
+2, Chemist
+5, Priest, Chemist 2
+6, Wizard, Chemist 2
+9, Mystic, Priest 3
+10, Time Mage, Wizard 3
+17, Arithmetician, Priest 5, Wizard 5, Mystic 3, Time Mage 3
+13, Orator, Mystic 3
+14, Summoner, Time Mage 3
+19, Bard, Orator 5, Summoner 5
+21, Onion Knight, Squire 6, Chemist 6
+20, Mime, Squire 8, Chemist 8, Geomancer 5, Dragoon 5, Summoner 5, Orator 5
+22, Dark Knight, Squire 8, Chemist 8, Knight *, Wizard *, Ninja 8, Geomancer 8, Dragoon 8, Samurai 8
