@@ -20,7 +20,7 @@ object Main extends App {
 
   println("hello")
 
-  def allocateJp(partyJp: List, remainingIterations: Int) {
+  def allocateJp(partyJp: List[Int], remainingIterations: Int) {
     if (remainingIterations == 0) {
       println(partyJp)
       println("done!")
@@ -29,11 +29,11 @@ object Main extends App {
     }
   }
 
-  def allocateJpChar(partyJp: List, remainingCharacters: Int): List = {
+  def allocateJpChar(partyJp: List[Int], remainingCharacters: Int): List[Int] = {
     if (remainingCharacters == 0) {
       return partyJp
     } else {
-
+      ???
     }
   }
 }
