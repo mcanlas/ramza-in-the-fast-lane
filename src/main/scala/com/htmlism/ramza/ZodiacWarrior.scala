@@ -1,3 +1,3 @@
 package com.htmlism.ramza
 
-case class ZodiacWarrior(jobs: Map[JobId, Int], experiencePoints: Int = 100)
+case class ZodiacWarrior(jobPoints: Map[JobId, Int], experiencePoints: Int = 100)
