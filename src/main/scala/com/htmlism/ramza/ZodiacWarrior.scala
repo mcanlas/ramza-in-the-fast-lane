@@ -7,12 +7,8 @@ case class ZodiacWarrior(jobPoints: Map[JobId, Int] = Map(1 -> 0, 2 -> 0), exper
 
   @tailrec
   final def jobLevel(job: JobId, minimumsToCheck: List[Int] = jobPointMinimums, level: Int = 1): Int = minimumsToCheck match {
-    case jobPointMinimum :: remainingMinimums =>
-      if (jobPoints(job) >= jobPointMinimum)
-        jobLevel(job, remainingMinimums, level + 1)
-      else
-        level
-    case Nil => level
+    case jobPointMinimum :: remainingMinimums if jobPoints(job) >= jobPointMinimum => jobLevel(job, remainingMinimums, level + 1)
+    case _ => level
   }
 
   def availableJobs = ???
