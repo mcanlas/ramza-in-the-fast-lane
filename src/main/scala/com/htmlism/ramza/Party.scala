@@ -1,3 +1,3 @@
 package com.htmlism.ramza
 
-case class Party(characters: Traversable[ZodiacWarrior])
+case class Party(characters: ZodiacWarrior*)
