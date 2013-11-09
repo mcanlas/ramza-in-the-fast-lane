@@ -63,7 +63,12 @@ for my $job (sort { $a->[0] <=> $b->[0] } @jobs) {
   my $class_name = $job->[1];
   my @prerequisites = keys %{ $jobs{$class_name} };
 
-  my $tuples = join ', ', map { 1 } @prerequisites;
+  my $tuples = join ', ', map {
+    my $object_name = s/ //r;
+    my $value = $jobs{$class_name}{$_};
+
+    "$object_name -> $value"
+  } @prerequisites;
 
   my $map = @prerequisites ? "Map($tuples)" : "Map[JobClass, Int]()";
 
