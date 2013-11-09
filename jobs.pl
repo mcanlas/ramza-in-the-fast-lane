@@ -60,9 +60,12 @@ for (sort { $a->[0] <=> $b->[0] } @jobs) {
 }
 
 for my $job (sort { $a->[0] <=> $b->[0] } @jobs) {
-  my $tuples = join ', ', map { 1 } @{ $job->[4] };
+  my $class_name = $job->[1];
+  my @prerequisites = keys %{ $jobs{$class_name} };
 
-  my $map = @{ $job->[4] } ? "Map($tuples)" : "Map[JobClass, Int]()";
+  my $tuples = join ', ', map { 1 } @prerequisites;
+
+  my $map = @prerequisites ? "Map($tuples)" : "Map[JobClass, Int]()";
 
   say sprintf "%-${longest_name_length}s -> $map,", $job->[3];
 }
