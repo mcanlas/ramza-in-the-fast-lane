@@ -13,5 +13,9 @@ case class ZodiacWarrior(jobPoints: Map[JobClass, Int] = Map.empty, experiencePo
     case _ => level
   }
 
-  def availableJobs = ???
+  def availableJobs = prerequisites.keys.filter({ jobName =>
+    prerequisites(jobName).forall({
+      case (prerequisiteName, prerequisiteLevel) => jobPoints.getOrElse(prerequisiteName, 0) >= prerequisiteLevel
+    })
+  })
 }
