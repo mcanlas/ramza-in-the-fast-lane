@@ -34,7 +34,7 @@ my @jobs = map {
   my $value_name = uc $class =~ s/ /_/r;
   my $object_name = $class =~ s/ //r;
 
-  [$id, $class, $value_name, $object_name, \@prerequisites]
+  [$id, $class, $value_name, $object_name]
 } @lines;
 
 use Data::Dumper; print Dumper \%jobs;
