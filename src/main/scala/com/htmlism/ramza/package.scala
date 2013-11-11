@@ -4,7 +4,7 @@ package object ramza {
   type JobId = Int
   type Parties = List[Party]
 
-  val jobPointMinimums = List(200, 400, 700, 1100, 1600, 2200, 3000)
+  val jobPointMinima = List(200, 400, 700, 1100, 1600, 2200, 3000)
 
   object Jobs extends Enumeration {
     type JobClass = Value

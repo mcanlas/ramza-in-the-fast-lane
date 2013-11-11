@@ -8,8 +8,8 @@ case class ZodiacWarrior(jobPoints: Map[JobClass, Int] = Map.empty, experiencePo
   import scala.annotation.tailrec
 
   @tailrec
-  final def jobLevel(job: JobClass, minimumsToCheck: List[Int] = jobPointMinimums, level: Int = 1): Int = minimumsToCheck match {
-    case jobPointMinimum :: remainingMinimums if jobPoints.contains(job) && jobPoints(job) >= jobPointMinimum => jobLevel(job, remainingMinimums, level + 1)
+  final def jobLevel(job: JobClass, minimumsToCheck: List[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
+    case jobPointMinimum :: remainingMinima if jobPoints.contains(job) && jobPoints(job) >= jobPointMinimum => jobLevel(job, remainingMinima, level + 1)
     case _ => level
   }
 
