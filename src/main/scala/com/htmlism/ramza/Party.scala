@@ -1,21 +1,20 @@
 package com.htmlism.ramza
 
-import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
 case class Party(characters: ZodiacWarrior*) {
   private def gainExperienceByJob = ???
 
-  private def gainExperienceByCharacter(parties: Parties, characterWithIndex: (ZodiacWarrior, Int), jobs: Traversable[JobClass]) = parties.flatMap {
-    p => jobs.toList.map {
-      j => p
-    }
+  private def gainExperienceByCharacter(parties: Parties, characterWithIndex: (ZodiacWarrior, Int)) = {
+    val (character, index) = characterWithIndex
+
+    parties.flatMap { p => character.availableJobs.toList.map { j => p } }
   }
 
   @tailrec
   private def gainExperienceRecursively(parties: Parties, characters: Traversable[(ZodiacWarrior, Int)]): Parties = characters.toList match {
     case head :: tail => {
-      val partiesFromOneCharacter = gainExperienceByCharacter(parties, head, head._1.availableJobs)
+      val partiesFromOneCharacter = gainExperienceByCharacter(parties, head)
 
       gainExperienceRecursively(partiesFromOneCharacter, tail)
     }
