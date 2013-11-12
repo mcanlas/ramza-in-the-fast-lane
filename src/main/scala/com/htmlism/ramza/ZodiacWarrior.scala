@@ -3,7 +3,7 @@ package com.htmlism.ramza
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
-case class ZodiacWarrior(jobPoints: Map[JobClass, Int] = Map.empty, experiencePoints: Int = 100) {
+case class ZodiacWarrior(experiencePoints: Int = 100, jobPoints: Map[JobClass, Int] = Map.empty) {
   def level = experiencePoints / 100
 
   @tailrec
