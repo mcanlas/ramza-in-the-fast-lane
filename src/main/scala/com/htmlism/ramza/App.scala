@@ -1,39 +1,26 @@
 package com.htmlism.ramza
 
-object Main extends App {
-  val SQUIRE = 0
-  val CHEMIST = 1
+import scala.annotation.tailrec
 
-  val partyJp = List(
-    List(0, 0),
-    List(0, 0),
-    List(0, 0),
-    List(0, 0),
-    List(0, 0)
+object Main extends App {
+  def defaultParty = Set(
+    Party(
+      ZodiacWarrior(),
+      ZodiacWarrior(),
+      ZodiacWarrior(),
+      ZodiacWarrior(),
+      ZodiacWarrior()
+    )
   )
 
-  for (i <- 1 to 30) {
-    for (j <- 0 to 4) {
+  @tailrec
+  def gainExperience(i: Int, set: Set[Party] = defaultParty, frontier: Set[Party] = Set.empty): Set[Party] = {
+    if (i > 0) {
+     val frontier = set.flatMap(x => x.gainExperience)
 
-    }
-  }
-
-  println("hello")
-
-  def allocateJp(partyJp: List[Int], remainingIterations: Int) {
-    if (remainingIterations == 0) {
-      println(partyJp)
-      println("done!")
+      gainExperience(i - 1, set ++ frontier, frontier -- set)
     } else {
-      allocateJp(partyJp, remainingIterations - 1)
-    }
-  }
-
-  def allocateJpChar(partyJp: List[Int], remainingCharacters: Int): List[Int] = {
-    if (remainingCharacters == 0) {
-      return partyJp
-    } else {
-      ???
+      frontier
     }
   }
 }
