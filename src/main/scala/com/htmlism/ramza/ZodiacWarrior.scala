@@ -17,4 +17,11 @@ case class ZodiacWarrior(experiencePoints: Int = 100, jobPoints: Map[JobClass, I
       case (prerequisiteName, prerequisiteLevel) => jobPoints.getOrElse(prerequisiteName, 0) >= prerequisiteLevel
     })
   })
+
+  def prettyPrint {
+    println("Experience: " + experiencePoints)
+    jobPoints.foreach {
+      case (k, v) => println("  " + k + ": " + v)
+    }
+  }
 }
