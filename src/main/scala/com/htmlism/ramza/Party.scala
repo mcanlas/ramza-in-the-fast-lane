@@ -43,7 +43,7 @@ case class Party(characters: ZodiacWarrior*) {
     case Nil => parties
   }
 
-  def gainExperience = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
+  def gainExperience = gainExperienceRecursively(Set(this), characters.zipWithIndex)
 
   def prettyPrint {
     characters.foreach(c => c.prettyPrint)
