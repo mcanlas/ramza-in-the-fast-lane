@@ -3,24 +3,24 @@ package com.htmlism.ramza
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
-case class ZodiacWarrior(experiencePoints: Int = 100, jobPoints: Map[JobClass, Int] = Map.empty) {
+case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] = Map.empty) {
   def level = experiencePoints / 100
 
   @tailrec
   final def jobLevel(job: JobClass, minimumsToCheck: List[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
-    case jobPointMinimum :: remainingMinima if jobPoints.contains(job) && jobPoints(job) >= jobPointMinimum => jobLevel(job, remainingMinima, level + 1)
+    case jobPointMinimum :: remainingMinima if jobs.contains(job) && jobs(job) >= jobPointMinimum => jobLevel(job, remainingMinima, level + 1)
     case _ => level
   }
 
   def availableJobs = prerequisites.keys.filter({ jobName =>
     prerequisites(jobName).forall({
-      case (prerequisiteName, prerequisiteLevel) => jobPoints.getOrElse(prerequisiteName, 0) >= prerequisiteLevel
+      case (prerequisiteName, prerequisiteLevel) => jobs.getOrElse(prerequisiteName, 0) >= prerequisiteLevel
     })
   })
 
   def prettyPrint {
     println("Experience: " + experiencePoints)
-    jobPoints.foreach {
+    jobs.foreach {
       case (k, v) => println("  " + k + ": " + v)
     }
   }
