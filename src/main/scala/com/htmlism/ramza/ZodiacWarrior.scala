@@ -21,9 +21,6 @@ case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] =
   def jobPoints(job: JobClass) = jobs.getOrElse(job, 0)
 
   def prettyPrint {
-    println("Experience: " + experiencePoints)
-    jobs.foreach {
-      case (k, v) => println("  " + k + ": " + v)
-    }
+    println("Experience: " + experiencePoints + jobs.map({ case (k, v) => "  " + k + ": " + v }).mkString(","))
   }
 }
