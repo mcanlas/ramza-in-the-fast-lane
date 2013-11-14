@@ -15,7 +15,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] =
   def availableJobs = prerequisites.keys.filter({ jobName =>
     import Jobs._
 
-    val special = if (jobName == DarkKnight) true else prerequisites(DarkKnight).contains(jobName) && jobLevel(jobName) < prerequisites(DarkKnight)(jobName)
+    val special = if (jobName == DarkKnight) false else prerequisites(DarkKnight).contains(jobName) && jobLevel(jobName) < prerequisites(DarkKnight)(jobName)
 
     special && prerequisites(jobName).forall({
       case (prerequisiteName, prerequisiteLevel) => jobLevel(prerequisiteName) >= prerequisiteLevel
