@@ -45,6 +45,8 @@ case class Party(characters: ZodiacWarrior*) {
 
   def gainExperience = gainExperienceRecursively(Set(this), characters.zipWithIndex)
 
+  def anyDistanceFrom(job: JobClass) = characters.map(_.distanceFrom(job)).min
+
   def prettyPrint {
     characters.foreach(c => c.prettyPrint)
     println("--")
