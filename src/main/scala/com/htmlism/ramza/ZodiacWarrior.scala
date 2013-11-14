@@ -24,6 +24,19 @@ case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] =
 
   def jobPoints(job: JobClass) = jobs.getOrElse(job, 0)
 
+  def distanceFrom(job: JobClass) = {
+    prerequisites(job).map {
+      case (prerequisiteJob, jobLevel) => {
+        val requiredPoints = jobPointMinima(jobLevel - 2)
+
+        if (requiredPoints > jobPoints(prerequisiteJob))
+          requiredPoints - jobPoints(prerequisiteJob)
+        else
+          0
+      }
+    }.sum
+  }
+
   def prettyPrint {
     println("Experience: " + experiencePoints + jobs.map({ case (k, v) => "  " + k + ": " + v }).mkString(","))
   }
