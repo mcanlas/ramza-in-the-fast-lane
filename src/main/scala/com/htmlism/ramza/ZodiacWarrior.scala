@@ -4,7 +4,7 @@ import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
 case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] = Map.empty) {
-  def level = experiencePoints / 100
+  def level = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
 
   @tailrec
   final def jobLevel(job: JobClass, minimumsToCheck: List[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
