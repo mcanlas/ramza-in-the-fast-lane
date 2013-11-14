@@ -40,7 +40,9 @@ case class Party(characters: ZodiacWarrior*) {
 
       gainExperienceRecursively(partiesFromOneCharacter, tail)
     }
-    case Nil => parties
+    case Nil => parties.map { p =>
+      Party(p.characters.sortBy(_.hashCode): _*)
+    }
   }
 
   def gainExperience = gainExperienceRecursively(Set(this), characters.zipWithIndex)

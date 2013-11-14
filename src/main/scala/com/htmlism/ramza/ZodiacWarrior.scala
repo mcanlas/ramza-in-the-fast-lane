@@ -40,4 +40,8 @@ case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] =
   def prettyPrint {
     println("Experience: " + experiencePoints + jobs.map({ case (k, v) => "  " + k + ": " + v }).mkString(","))
   }
+
+  def toStableSortableString = {
+    experiencePoints.toString + jobs.keys.toList.sorted.map { k => k.toString + jobs(k) }.mkString
+  }
 }
