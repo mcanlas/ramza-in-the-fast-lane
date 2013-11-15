@@ -7,8 +7,8 @@ Testing
 -------
 
     $ sbt console
-    scala> ZodiacWarrior(Map(Chemist -> 1110)).jobLevel(Chemist)
-    res0: Int = 5
+    scala> Party(ZodiacWarrior(), ZodiacWarrior()).gainExperience
+    res0: ...
 
 Generating code
 ---------------
