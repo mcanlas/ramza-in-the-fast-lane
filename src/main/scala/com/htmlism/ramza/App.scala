@@ -14,7 +14,7 @@ object Main extends App {
   )
 
   @tailrec
-  def gainExperience(i: Int, set: Parties = defaultParty, frontier: Parties = Set.empty): Parties = {
+  def gainExperience(i: Int, set: Set[Party] = defaultParty, frontier: Set[Party] = Set.empty): Set[Party] = {
     if (i > 0) {
       val frontier = set.flatMap(x => x.gainExperience)
       println(i)
