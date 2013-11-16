@@ -4,6 +4,13 @@ import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
 case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] = Map.empty) {
+  def withExp(job: JobClass, baseJpToGain: Int) = {
+    val currentJp = jobPoints(job)
+    val augmentedJpToGain = baseJpToGain * 3 / 2
+
+    ZodiacWarrior(experiencePoints = experiencePoints + 10, jobs + (job -> (currentJp + augmentedJpToGain)))
+  }
+
   def withSharedJp(job: JobClass, baseJpToGain: Int) = {
     val currentJp = jobPoints(job)
 

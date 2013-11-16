@@ -8,13 +8,10 @@ case class Party(characters: ZodiacWarrior*) {
     Party(
       party.characters.zipWithIndex.map {
         case (ally, allyIndex) => {
-          val currentJp = ally.jobPoints(job)
-
           val jpToGain = 8 + character.jobLevel(job) * 2 + character.level / 4
-          val augmentedJpToGain = jpToGain * 3 / 2
 
           if (allyIndex == index) {
-            ZodiacWarrior(ally.experiencePoints + 10, character.jobs + (job -> (currentJp + augmentedJpToGain)))
+            ally withExp(job, jpToGain)
           } else {
             ally withSharedJp(job, jpToGain)
           }
