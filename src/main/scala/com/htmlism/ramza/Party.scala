@@ -16,7 +16,7 @@ case class Party(characters: ZodiacWarrior*) {
           if (allyIndex == index) {
             ZodiacWarrior(ally.experiencePoints + 10, character.jobs + (job -> (currentJp + augmentedJpToGain)))
           } else {
-            ally.copy(jobs = ally.jobs + (job -> (currentJp + jpToGain / 4)))
+            ally withSharedJp(job, jpToGain)
           }
         }
       }: _*

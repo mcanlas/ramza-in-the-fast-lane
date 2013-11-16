@@ -4,6 +4,12 @@ import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
 case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] = Map.empty) {
+  def withSharedJp(job: JobClass, baseJpToGain: Int) = {
+    val currentJp = jobPoints(job)
+
+    copy(jobs = jobs + (job -> (currentJp + baseJpToGain / 4)))
+  }
+
   def level = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
 
   @tailrec
