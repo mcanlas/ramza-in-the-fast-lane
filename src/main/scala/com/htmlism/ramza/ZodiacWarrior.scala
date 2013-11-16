@@ -3,7 +3,7 @@ package com.htmlism.ramza
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
-case class ZodiacWarrior(experiencePoints: Int = 100, jobs: Map[JobClass, Int] = Map.empty) {
+case class ZodiacWarrior(private val experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty) {
   def withExp(job: JobClass, baseJpToGain: Int) = {
     val currentJp = jobPoints(job)
     val augmentedJpToGain = baseJpToGain * 3 / 2
