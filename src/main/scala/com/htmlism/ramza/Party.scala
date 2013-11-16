@@ -23,7 +23,7 @@ case class Party(characters: ZodiacWarrior*) {
     )
   }
 
-  private def gainExperienceByCharacter(parties: Parties, characterWithIndex: (ZodiacWarrior, Int)) = {
+  private def gainExperienceByCharacter(parties: List[Party], characterWithIndex: (ZodiacWarrior, Int)) = {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
@@ -34,7 +34,7 @@ case class Party(characters: ZodiacWarrior*) {
   }
 
   @tailrec
-  private def gainExperienceRecursively(parties: Parties, characters: Traversable[(ZodiacWarrior, Int)]): Parties = characters.toList match {
+  private def gainExperienceRecursively(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)]): List[Party] = characters.toList match {
     case head :: tail => {
       val partiesFromOneCharacter = gainExperienceByCharacter(parties, head)
 
@@ -45,7 +45,7 @@ case class Party(characters: ZodiacWarrior*) {
     }
   }
 
-  def gainExperience = gainExperienceRecursively(Set(this), characters.zipWithIndex)
+  def gainExperience = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
 
   def anyDistanceFrom(job: JobClass) = characters.map(_.distanceFrom(job)).min
 
