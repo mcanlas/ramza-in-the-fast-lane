@@ -9,7 +9,6 @@ object Main extends App {
       ZodiacWarrior(),
       ZodiacWarrior(),
       ZodiacWarrior(),
-      ZodiacWarrior(),
       ZodiacWarrior()
     )
   )
