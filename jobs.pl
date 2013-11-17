@@ -53,7 +53,8 @@ for (sort { $a->[0] <=> $b->[0] } @jobs) {
   say sprintf "%-${longest_name_length}s -> 0,", $_->[2];
 }
 
-say join ', ', map { $_->[3] } @jobs;
+say join ",\n", map { $_->[3] } @jobs;
+say join ", ", map { qq!"$_->[3]"! } @jobs;
 
 for (sort { $a->[0] <=> $b->[0] } @jobs) {
   say sprintf "%-${longest_name_length}s -> 0,", $_->[3];
