@@ -63,6 +63,8 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
   }
 
   def toStableSortableString = {
-    experiencePoints.toString + jobs.keys.toList.sorted.map { k => k.toString + jobs(k) }.mkString
+    val values = experiencePoints :: jobs.keys.toList.sorted.map { k => jobs(k) }
+
+    values.mkString(",")
   }
 }
