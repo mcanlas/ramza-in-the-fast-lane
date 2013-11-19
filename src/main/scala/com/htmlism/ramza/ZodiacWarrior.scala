@@ -3,12 +3,12 @@ package com.htmlism.ramza
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
-case class ZodiacWarrior(private val experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty) {
+case class ZodiacWarrior(private val experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty, private val jp: Vector[Int] = Vector()) {
   def withExp(job: JobClass, baseJpToGain: Int) = {
     val currentJp = jobPoints(job)
     val augmentedJpToGain = baseJpToGain * 3 / 2
 
-    ZodiacWarrior(experiencePoints = experiencePoints + 10, jobs + (job -> (currentJp + augmentedJpToGain)))
+    ZodiacWarrior(experiencePoints + 10, jobs + (job -> (currentJp + augmentedJpToGain)))
   }
 
   def withSharedJp(job: JobClass, baseJpToGain: Int) = {
