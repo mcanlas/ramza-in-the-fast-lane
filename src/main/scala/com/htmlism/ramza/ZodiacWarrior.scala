@@ -11,7 +11,7 @@ object ZodiacWarrior {
   }
 }
 
-case class ZodiacWarrior(private val experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty, private val jp: Vector[Int] = Vector()) {
+case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty, private val jp: Vector[Int] = Vector()) {
   def withExp(job: JobClass, baseJpToGain: Int) = {
     val currentJp = jobPoints(job)
     val augmentedJpToGain = baseJpToGain * 3 / 2
