@@ -3,6 +3,14 @@ package com.htmlism.ramza
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
+object ZodiacWarrior {
+  def toSolve(jobClass: JobClass) = {
+    val size = prerequisites(jobClass).size
+
+    ZodiacWarrior(jp = Vector.fill(size)(0))
+  }
+}
+
 case class ZodiacWarrior(private val experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty, private val jp: Vector[Int] = Vector()) {
   def withExp(job: JobClass, baseJpToGain: Int) = {
     val currentJp = jobPoints(job)
