@@ -1,9 +1,20 @@
 package com.htmlism.ramza
 
-import com.htmlism.ramza.Jobs.DarkKnight
+import com.htmlism.ramza.Jobs._
 import scala.annotation.tailrec
 
 object Main extends App {
+  def solveFor(jobClass: JobClass) = {
+    val seed = Set(
+      ZodiacWarrior toSolve(jobClass),
+      ZodiacWarrior toSolve(jobClass),
+      ZodiacWarrior toSolve(jobClass),
+      ZodiacWarrior toSolve(jobClass)
+    )
+
+    seed
+  }
+
   def defaultParty = Set(
     Party(
       ZodiacWarrior(),
