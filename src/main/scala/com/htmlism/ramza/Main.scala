@@ -6,10 +6,10 @@ import scala.annotation.tailrec
 object Main extends App {
   def solveFor(jobClass: JobClass) = {
     val seed = Set(
-      ZodiacWarrior toSolve(jobClass),
-      ZodiacWarrior toSolve(jobClass),
-      ZodiacWarrior toSolve(jobClass),
-      ZodiacWarrior toSolve(jobClass)
+      ZodiacWarrior toSolve jobClass,
+      ZodiacWarrior toSolve jobClass,
+      ZodiacWarrior toSolve jobClass,
+      ZodiacWarrior toSolve jobClass
     )
 
     seed
