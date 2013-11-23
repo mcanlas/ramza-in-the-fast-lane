@@ -4,6 +4,23 @@ import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
 object ZodiacWarrior {
+  def dictionaryFor(jobClass: JobClass) = {
+    val prerequisitesForThisJob = prerequisites(jobClass)
+
+    val indexesByJob = (prerequisites(jobClass).keys.zipWithIndex.toList :+ (jobClass, prerequisitesForThisJob.size)).toMap
+    val sortedJobs = indexesByJob.toList sortBy(_._2) map(_._1)
+
+    val prerequisitesTable = (sortedJobs map {
+      j =>
+        (sortedJobs map {
+          prereq =>
+            prerequisites(j).getOrElse(prereq, 0)
+        }).toVector
+    }).toVector
+
+    (indexesByJob, prerequisitesTable)
+  }
+
   def toSolve(jobClass: JobClass) = {
     val size = prerequisites(jobClass).size
 

@@ -5,6 +5,8 @@ import scala.annotation.tailrec
 
 object Main extends App {
   def solveFor(jobClass: JobClass) = {
+    val (indexesByJob, prerequisitesTable)  = ZodiacWarrior dictionaryFor jobClass
+
     val seed = Set(
       ZodiacWarrior toSolve jobClass,
       ZodiacWarrior toSolve jobClass,
