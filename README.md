@@ -6,9 +6,7 @@ Exploring optimality in Final Fantasy Tactics
 Testing
 -------
 
-    $ sbt console
-    scala> Party(ZodiacWarrior(), ZodiacWarrior()).gainExperience
-    res0: ...
+    $ sbt test
 
 Generating code
 ---------------
