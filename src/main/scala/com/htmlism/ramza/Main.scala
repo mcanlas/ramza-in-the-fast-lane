@@ -4,30 +4,23 @@ import com.htmlism.ramza.Jobs._
 import scala.annotation.tailrec
 
 object Main extends App {
-  def solveFor(jobClass: JobClass) = {
+  def solveFor(jobClass: JobClass, i: Int) = {
     val (indexesByJob, prerequisitesTable)  = ZodiacWarrior dictionaryFor jobClass
 
     val seed = Set(
-      ZodiacWarrior toSolve jobClass,
-      ZodiacWarrior toSolve jobClass,
-      ZodiacWarrior toSolve jobClass,
-      ZodiacWarrior toSolve jobClass
+      Party(
+        ZodiacWarrior toSolve jobClass,
+        ZodiacWarrior toSolve jobClass,
+        ZodiacWarrior toSolve jobClass,
+        ZodiacWarrior toSolve jobClass
+      )
     )
 
-    seed
+    gainExperience(i, seed)
   }
 
-  def defaultParty = Set(
-    Party(
-      ZodiacWarrior(),
-      ZodiacWarrior(),
-      ZodiacWarrior(),
-      ZodiacWarrior()
-    )
-  )
-
   @tailrec
-  def gainExperience(i: Int, set: Set[Party] = defaultParty, frontier: Set[Party] = Set.empty): Set[Party] = {
+  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty): Set[Party] = {
     if (i > 0) {
       val frontier = set.flatMap(x => x.gainExperience)
       println(i)
