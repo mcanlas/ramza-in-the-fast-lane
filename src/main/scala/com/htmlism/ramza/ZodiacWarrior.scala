@@ -4,6 +4,8 @@ import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
 
 object ZodiacWarrior {
+  type PrerequisiteTable = Vector[Vector[Int]]
+
   def dictionaryFor(jobClass: JobClass) = {
     val prerequisitesForThisJob = prerequisites(jobClass)
 

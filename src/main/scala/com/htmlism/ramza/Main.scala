@@ -1,11 +1,12 @@
 package com.htmlism.ramza
 
 import com.htmlism.ramza.Jobs._
+import com.htmlism.ramza.ZodiacWarrior.PrerequisiteTable
 import scala.annotation.tailrec
 
 object Main extends App {
-  def solveFor(jobClass: JobClass, i: Int) = {
-    val (indexesByJob, prerequisitesTable)  = ZodiacWarrior dictionaryFor jobClass
+  def solveFor(implicit jobClass: JobClass, i: Int) = {
+    implicit val (indexesByJob, prerequisitesTable) = ZodiacWarrior dictionaryFor jobClass
 
     val seed = Set(
       Party(
@@ -20,14 +21,14 @@ object Main extends App {
   }
 
   @tailrec
-  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty): Set[Party] = {
+  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit jobClass: JobClass, prerequisites: PrerequisiteTable): Set[Party] = {
     if (i > 0) {
       val frontier = set.flatMap(x => x.gainExperience)
       println(i)
 
       if (frontier.isEmpty) throw new Exception("hello")
 
-      val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(DarkKnight))
+      val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(jobClass))
       val trimmedFrontier = frontierByDistance(frontierByDistance.keys.min)
 
       if (trimmedFrontier.isEmpty) throw new Exception("zoo!!")
