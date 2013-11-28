@@ -34,4 +34,21 @@ class ZodiacWarriorSpec extends Specification {
     "have one when solving for Squire" in { (ZodiacWarrior toSolve Squire availableJobsVector).length == 1 }
     "have two when solving for Knight" in { (ZodiacWarrior toSolve Knight availableJobsVector).length == 2 }
   }
+
+  "Experience gain" should {
+    implicit val (indexes, table) = ZodiacWarrior dictionaryFor Knight
+    val character = ZodiacWarrior toSolve Knight
+    val characterWithExperience = character withExp(0, 2)
+
+    "have the correct experience" in { characterWithExperience.experiencePoints == 110 }
+    "have the correct job points" in { characterWithExperience.jobPoints(0) == 3 }
+  }
+
+  "Job points gain" should {
+    implicit val (indexes, table) = ZodiacWarrior dictionaryFor Knight
+    val character = ZodiacWarrior toSolve Knight
+    val characterWithJobPoints = character withSharedJp(0, 4)
+
+    "have the correct job points" in { characterWithJobPoints.jobPoints(0) == 1 }
+  }
 }
