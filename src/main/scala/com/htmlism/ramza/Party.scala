@@ -4,9 +4,9 @@ import scala.annotation.tailrec
 import com.htmlism.ramza.Jobs.JobClass
 
 case class Party(characters: ZodiacWarrior*) {
-  private def gainExperienceByJob(party: Party, character: ZodiacWarrior, index: Int, job: JobClass) = {
+  private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: JobClass) = {
     Party(
-      party.characters.zipWithIndex.map {
+      characters.zipWithIndex.map {
         case (ally, allyIndex) => {
           val jpToGain = 8 + character.jobLevel(job) * 2 + character.level / 4
 
@@ -25,7 +25,7 @@ case class Party(characters: ZodiacWarrior*) {
 
     parties.flatMap { p =>
       character.availableJobs.toList.map { j =>
-        gainExperienceByJob(p, character, index, j)
+        p.gainExperienceByJob(character, index, j)
       }
     }
   }
