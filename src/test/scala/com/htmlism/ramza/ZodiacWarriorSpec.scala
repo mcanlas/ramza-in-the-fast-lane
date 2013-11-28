@@ -29,4 +29,9 @@ class ZodiacWarriorSpec extends Specification {
     "require 3 for Knight" in { monkRequirements(indexes(Knight)) == 3 }
     "require 2 for Squire" in { monkRequirements(indexes(Squire)) == 2 }
   }
+
+  "Available jobs" should {
+    "have one when solving for Squire" in { (ZodiacWarrior toSolve Squire availableJobsVector).length == 1 }
+    "have two when solving for Knight" in { (ZodiacWarrior toSolve Knight availableJobsVector).length == 2 }
+  }
 }
