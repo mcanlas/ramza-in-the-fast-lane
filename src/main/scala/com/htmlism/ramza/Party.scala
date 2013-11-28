@@ -42,7 +42,21 @@ case class Party(characters: ZodiacWarrior*) {
     }
   }
 
+  @tailrec
+  private def gainExperienceRecursivelyVector(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)]): List[Party] = characters.toList match {
+    case head :: tail => {
+      val partiesFromOneCharacter = gainExperienceByCharacter(parties, head)
+
+      gainExperienceRecursivelyVector(partiesFromOneCharacter, tail)
+    }
+    case Nil => parties.map { p =>
+      Party(p.characters.sortBy(_.toStableSortableString): _*)
+    }
+  }
+
   def gainExperience = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
+
+  def gainExperienceVector = gainExperienceRecursivelyVector(this :: Nil, characters.zipWithIndex)
 
   def anyDistanceFrom(job: JobClass) = characters.map(_.distanceFrom(job)).min
 
