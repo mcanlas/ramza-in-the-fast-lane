@@ -2,6 +2,7 @@ package com.htmlism.ramza
 
 import scala.annotation.tailrec
 import com.htmlism.ramza.Jobs.JobClass
+import com.htmlism.ramza.ZodiacWarrior._
 
 case class Party(characters: ZodiacWarrior*) {
   private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: JobClass) = {
@@ -20,7 +21,7 @@ case class Party(characters: ZodiacWarrior*) {
     )
   }
 
-  private def gainExperienceByCharacter(parties: List[Party], characterWithIndex: (ZodiacWarrior, Int)) = {
+  private def gainExperienceByCharacter(parties: List[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit prerequisites: PrerequisiteTable) = {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
@@ -31,7 +32,7 @@ case class Party(characters: ZodiacWarrior*) {
   }
 
   @tailrec
-  private def gainExperienceRecursively(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)]): List[Party] = characters.toList match {
+  private def gainExperienceRecursively(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)])(implicit prerequisites: PrerequisiteTable): List[Party] = characters.toList match {
     case head :: tail => {
       val partiesFromOneCharacter = gainExperienceByCharacter(parties, head)
 
@@ -42,7 +43,7 @@ case class Party(characters: ZodiacWarrior*) {
     }
   }
 
-  def gainExperience = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
+  def gainExperience(implicit prerequisites: PrerequisiteTable) = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
 
   def anyDistanceFrom(job: JobClass) = characters.map(_.distanceFrom(job)).min
 
