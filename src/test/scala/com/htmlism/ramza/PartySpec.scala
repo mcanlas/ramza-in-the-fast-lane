@@ -8,7 +8,7 @@ class PartySpec extends Specification {
     "yield one solution" in {
       implicit val (_, prerequisitesTable) = ZodiacWarrior dictionaryFor Squire
 
-      Party().gainExperience.size == 1
+      Party().gainExperience.size === 1
     }
   }
 
@@ -16,7 +16,7 @@ class PartySpec extends Specification {
     "incorrectly yield two solutions" in {
       implicit val (_, prerequisitesTable) = ZodiacWarrior dictionaryFor Squire
 
-      Party(ZodiacWarrior toSolve Squire).gainExperience.length == 2
+      Party(ZodiacWarrior toSolve Squire).gainExperience.length === 2
     }
   }
 }
