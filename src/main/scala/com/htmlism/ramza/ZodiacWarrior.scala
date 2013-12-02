@@ -71,7 +71,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
     })
   })
 
-  def availableJobsVector = (0 to jp.length) toList
+  def availableJobsVector = (0 to jp.length).toList
 
   def jobPoints(job: JobClass) = jobs.getOrElse(job, 0)
 
