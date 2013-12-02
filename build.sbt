@@ -8,3 +8,5 @@ initialCommands in console := """
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.3.4" % "test"
 )
+
+scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
