@@ -15,8 +15,8 @@ class ZodiacWarriorSpec extends Specification {
     val size = indexes.size
 
     "have one job" in { size must beEqualTo(1) }
-    "have a prerequisite table of one squared" in { table.length === size && table.forall(_.length === size) }
-    "start at zero" in { table(0)(0) === 0 }
+    "have a prerequisite table of one squared" in { table.length === size && table.forall(_.length === size - 1) }
+    "only job (self) has no prerequisites" in { table(0).isEmpty }
   }
 
   "Dictionary for Monk" should {
@@ -25,7 +25,7 @@ class ZodiacWarriorSpec extends Specification {
     val monkRequirements = table(indexes(Monk))
 
     "have three jobs" in { size must beEqualTo(3) }
-    "have a prerequisite table of three squared" in { table.length === size && table.forall(_.length === size) }
+    "have a prerequisite table of three squared" in { table.length === size && table.forall(_.length === size - 1) }
     "require 3 for Knight" in { monkRequirements(indexes(Knight)) === 3 }
     "require 2 for Squire" in { monkRequirements(indexes(Squire)) === 2 }
   }
