@@ -28,16 +28,16 @@ object ZodiacWarrior {
   def toSolve(jobClass: JobClass) = {
     val size = prerequisites(jobClass).size
 
-    ZodiacWarrior(jp = Vector.fill(size)(0))
+    ZodiacWarrior(career = Vector.fill(size)(0))
   }
 }
 
-case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty, private val jp: Vector[Int] = Vector()) {
+case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobClass, Int] = Map.empty, private val career: Vector[Int] = Vector()) {
   def withExp(jobIndex: Int, baseJpToGain: Int) = {
-    val currentJp = jp(jobIndex)
+    val currentJp = career(jobIndex)
     val augmentedJpToGain = baseJpToGain * 3 / 2
 
-    ZodiacWarrior(experiencePoints + 10, jp = jp.updated(jobIndex, currentJp + augmentedJpToGain))
+    ZodiacWarrior(experiencePoints + 10, career = career.updated(jobIndex, currentJp + augmentedJpToGain))
   }
 
   def withExp(job: JobClass, baseJpToGain: Int) = {
@@ -48,9 +48,9 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
   }
 
   def withSharedJp(jobIndex: Int, baseJpToGain: Int) = {
-    val currentJp = jp(jobIndex)
+    val currentJp = career(jobIndex)
 
-    copy(jp = jp.updated(jobIndex, currentJp + baseJpToGain / 4))
+    copy(career = career.updated(jobIndex, currentJp + baseJpToGain / 4))
   }
 
   def withSharedJp(job: JobClass, baseJpToGain: Int) = {
@@ -73,11 +73,11 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
     })
   })
 
-  def availableJobsVector = (0 to jp.length).toList
+  def availableJobsVector = (0 to career.length).toList
 
   def jobPoints(job: JobClass) = jobs.getOrElse(job, 0)
 
-  def jobPoints(jobIndex: Int) = jp(jobIndex)
+  def jobPoints(jobIndex: Int) = career(jobIndex)
 
   def distanceFrom(job: JobClass) = {
     prerequisites(job).map {
