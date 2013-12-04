@@ -9,8 +9,8 @@ object ZodiacWarrior {
   def dictionaryFor(jobClass: JobClass) = {
     val prerequisitesForThisJob = prerequisites(jobClass)
 
-    val indexesByJob = prerequisites(jobClass).keys.zipWithIndex.toList.toMap
-    val sortedJobs = indexesByJob.toList sortBy(_._2) map(_._1)
+    val indexesByPrerequisites = prerequisites(jobClass).keys.zipWithIndex.toList.toMap
+    val sortedJobs = indexesByPrerequisites.toList sortBy(_._2) map(_._1)
 
     val prerequisitesTable = ((sortedJobs :+ jobClass) map {
       j =>
@@ -20,7 +20,9 @@ object ZodiacWarrior {
         }).toVector
     }).toVector
 
-    (indexesByJob + (jobClass -> prerequisitesForThisJob.size), prerequisitesTable)
+    val indexesByJob = indexesByPrerequisites + (jobClass -> prerequisitesForThisJob.size)
+
+    (indexesByJob, prerequisitesTable)
   }
 
   def toSolve(jobClass: JobClass) = {
