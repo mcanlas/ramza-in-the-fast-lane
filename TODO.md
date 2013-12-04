@@ -1,8 +1,10 @@
-== Next ==
+Next action
+===========
 
 * implement a vector version of available jobs
 
-== Miscellaneous ==
+Miscellaneous
+=============
 
 * add specs
 * add scalariform
