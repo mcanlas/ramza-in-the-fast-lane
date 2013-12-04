@@ -1,7 +1,8 @@
 Next action
 ===========
 
-* implement a vector version of available jobs
+1. implement a vector version of job level by job index
+1. implement a vector version of available jobs
 
 Miscellaneous
 =============
