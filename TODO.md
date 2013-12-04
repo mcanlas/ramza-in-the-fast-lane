@@ -1,3 +1,9 @@
+== Next ==
+
+* implement a vector version of available jobs
+
+== Miscellaneous ==
+
 * add specs
 * add scalariform
 * add microbenchmarking
