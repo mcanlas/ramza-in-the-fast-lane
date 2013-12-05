@@ -47,6 +47,8 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
     ZodiacWarrior(experiencePoints + 10, jobs + (job -> (currentJp + augmentedJpToGain)))
   }
 
+  def withJp(job: JobClass, newJobPoints: Int)(implicit indexesByJob: Map[JobClass, Int]) = copy(career = career.updated(indexesByJob(job), newJobPoints))
+
   def withSharedJp(jobIndex: Int, baseJpToGain: Int) = {
     val currentJp = career(jobIndex)
 
@@ -64,6 +66,12 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
   @tailrec
   final def jobLevel(job: JobClass, minimumsToCheck: List[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
     case jobPointMinimum :: remainingMinima if jobPoints(job) >= jobPointMinimum => jobLevel(job, remainingMinima, level + 1)
+    case _ => level
+  }
+
+  @tailrec
+  final def jobLevelVector(jobIndex: Int, minimumsToCheck: List[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
+    case jobPointMinimum :: remainingMinima if career(jobIndex) >= jobPointMinimum => jobLevelVector(jobIndex, remainingMinima, level + 1)
     case _ => level
   }
 

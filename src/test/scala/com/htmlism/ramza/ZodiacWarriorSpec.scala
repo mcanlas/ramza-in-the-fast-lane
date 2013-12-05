@@ -30,6 +30,12 @@ class ZodiacWarriorSpec extends Specification {
     "require 2 for Squire" in { monkRequirements(indexes(Squire)) === 2 }
   }
 
+  "Job levels" should {
+    implicit val (indexes, table) = ZodiacWarrior dictionaryFor Squire
+
+    "be two for a level two squire solving for knight" in (ZodiacWarrior toSolve Knight withJp (Squire, 200)).jobLevelVector(indexes(Squire)) === 2
+  }
+
   "Available jobs" should {
     "have one when solving for Squire" in { (ZodiacWarrior toSolve Squire availableJobsVector).length === 1 }
     "have two when solving for Knight" in { (ZodiacWarrior toSolve Knight availableJobsVector).length === 2 }
