@@ -50,17 +50,9 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
 
   def withJp(job: JobClass, newJobPoints: Int)(implicit indexesByJob: Map[JobClass, Int]) = copy(career = career.updated(indexesByJob(job), newJobPoints))
 
-  def withSharedJp(jobIndex: Int, baseJpToGain: Int) = {
-    val currentJp = career(jobIndex)
+  def withSharedJp(jobIndex: Int, baseJpToGain: Int) = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
 
-    copy(career = career.updated(jobIndex, currentJp + baseJpToGain / 4))
-  }
-
-  def withSharedJp(job: JobClass, baseJpToGain: Int) = {
-    val currentJp = jobPoints(job)
-
-    copy(jobs = jobs + (job -> (currentJp + baseJpToGain / 4)))
-  }
+  def withSharedJp(job: JobClass, baseJpToGain: Int) = copy(jobs = jobs + (job -> (jobPoints(job) + baseJpToGain / 4)))
 
   def level = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
 
