@@ -45,9 +45,4 @@ case class Party(characters: ZodiacWarrior*) {
   def gainExperience(implicit prerequisites: PrerequisiteTable) = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
 
   def anyDistanceFrom(job: Int)(implicit prerequisites: PrerequisiteTable) = characters.map(_.distanceFrom(job)).min
-
-  def prettyPrint {
-    characters.foreach(c => c.prettyPrint)
-    println("--")
-  }
 }
