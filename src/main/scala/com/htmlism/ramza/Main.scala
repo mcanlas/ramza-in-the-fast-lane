@@ -21,14 +21,14 @@ object Main extends App {
   }
 
   @tailrec
-  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit jobClass: JobClass, prerequisites: PrerequisiteTable): Set[Party] = {
+  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit jobClass: JobClass, indexesByJob: Map[JobClass, Int], prerequisites: PrerequisiteTable): Set[Party] = {
     if (i > 0) {
       val frontier = set.flatMap(x => x.gainExperience)
       println(i)
 
       if (frontier.isEmpty) throw new Exception("hello")
 
-      val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(jobClass))
+      val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(indexesByJob(jobClass)))
       val trimmedFrontier = frontierByDistance(frontierByDistance.keys.min)
 
       if (trimmedFrontier.isEmpty) throw new Exception("zoo!!")

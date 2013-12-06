@@ -11,12 +11,4 @@ class PartySpec extends Specification {
       Party().gainExperience.size === 1
     }
   }
-
-  "A party of one" should {
-    "incorrectly yield two solutions" in {
-      implicit val (_, prerequisitesTable) = ZodiacWarrior dictionaryFor Squire
-
-      Party(ZodiacWarrior toSolve Squire).gainExperience.length === 2
-    }
-  }
 }

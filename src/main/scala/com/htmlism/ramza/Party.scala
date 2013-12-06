@@ -1,15 +1,14 @@
 package com.htmlism.ramza
 
 import scala.annotation.tailrec
-import com.htmlism.ramza.Jobs.JobClass
 import com.htmlism.ramza.ZodiacWarrior._
 
 case class Party(characters: ZodiacWarrior*) {
-  private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: JobClass) = {
+  private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: Int) = {
     Party(
       characters.zipWithIndex.map {
         case (ally, allyIndex) => {
-          val jpToGain = 8 + character.jobLevel(job) * 2 + character.level / 4
+          val jpToGain = 8 + character.jobLevelVector(job) * 2 + character.level / 4
 
           if (allyIndex == index) {
             ally withExp(job, jpToGain)
@@ -25,7 +24,7 @@ case class Party(characters: ZodiacWarrior*) {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
-      character.availableJobs.toList.map { j =>
+      character.availableJobsVector.toList.map { j =>
         p.gainExperienceByJob(character, index, j)
       }
     }
@@ -45,7 +44,7 @@ case class Party(characters: ZodiacWarrior*) {
 
   def gainExperience(implicit prerequisites: PrerequisiteTable) = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
 
-  def anyDistanceFrom(job: JobClass) = characters.map(_.distanceFrom(job)).min
+  def anyDistanceFrom(job: Int)(implicit prerequisites: PrerequisiteTable) = characters.map(_.distanceFrom(job)).min
 
   def prettyPrint {
     characters.foreach(c => c.prettyPrint)

@@ -86,16 +86,14 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
 
   def jobPoints(jobIndex: Int) = career(jobIndex)
 
-  def distanceFrom(job: JobClass) = {
-    prerequisites(job).map {
-      case (prerequisiteJob, jobLevel) => {
-        val requiredPoints = jobPointMinima(jobLevel - 2)
+  def distanceFrom(job: Int)(implicit prerequisites: PrerequisiteTable) = {
+    prerequisites(job).indices.map { i =>
+      val requiredPoints = jobPointMinima(prerequisites(job)(i) - 2)
 
-        if (requiredPoints > jobPoints(prerequisiteJob))
-          requiredPoints - jobPoints(prerequisiteJob)
-        else
-          0
-      }
+      if (requiredPoints > career(i))
+        requiredPoints - career(i)
+      else
+        0
     }.sum
   }
 
@@ -103,9 +101,5 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
     println("Experience: " + experiencePoints + jobs.map({ case (k, v) => "  " + k + ": " + v }).mkString(","))
   }
 
-  def toStableSortableString = {
-    val values = experiencePoints :: jobs.keys.toList.sorted.map { k => jobs(k) }
-
-    values.mkString(",")
-  }
+  def toStableSortableString = (experiencePoints :: career.toList).mkString(",")
 }
