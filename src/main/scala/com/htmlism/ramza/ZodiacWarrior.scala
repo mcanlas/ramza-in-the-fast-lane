@@ -2,6 +2,7 @@ package com.htmlism.ramza
 
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
+import com.htmlism.ramza.ZodiacWarrior._
 
 object ZodiacWarrior {
   type PrerequisiteTable = Vector[Vector[Int]]
@@ -81,7 +82,13 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val jobs: Map[JobC
     })
   })
 
-  def availableJobsVector = (0 to career.length).toList
+  def availableJobsVector(implicit prerequisites: PrerequisiteTable) = prerequisites.indices.filter({ i =>
+    val prereq = prerequisites(i)
+
+    prereq.indices.forall({ jobIndex =>
+      jobLevelVector(jobIndex) >= prereq(jobIndex)
+    })
+  })
 
   def jobPoints(job: JobClass) = jobs.getOrElse(job, 0)
 

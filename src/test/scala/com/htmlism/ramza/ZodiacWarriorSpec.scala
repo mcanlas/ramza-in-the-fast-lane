@@ -37,8 +37,10 @@ class ZodiacWarriorSpec extends Specification {
   }
 
   "Available jobs" should {
-    "have one when solving for Squire" in { (ZodiacWarrior toSolve Squire availableJobsVector).length === 1 }
-    "have two when solving for Knight" in { (ZodiacWarrior toSolve Knight availableJobsVector).length === 2 }
+    implicit val (indexes, table) = ZodiacWarrior dictionaryFor Knight
+
+    "have one when solving for Squire" in (ZodiacWarrior toSolve Knight availableJobsVector).length === 1
+    "have two when solving for Knight" in (ZodiacWarrior toSolve Knight withJp (Squire, 200) availableJobsVector).length === 2
   }
 
   "Experience gain" should {

@@ -1,7 +1,8 @@
 Next action
 ===========
 
-1. implement a vector version of available jobs
+1. gut party solver to use vector methods
+1. kill map methods
 
 Miscellaneous
 =============
