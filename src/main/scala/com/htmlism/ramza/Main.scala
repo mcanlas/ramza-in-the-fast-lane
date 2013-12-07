@@ -5,19 +5,10 @@ import com.htmlism.ramza.ZodiacWarrior.PrerequisiteTable
 import scala.annotation.tailrec
 
 object Main extends App {
-  def solveFor(implicit jobClass: JobClass, i: Int) = {
+  def solveFor(implicit jobClass: JobClass, i: Int, seed: Set[Party] = Set.empty) = {
     implicit val (indexesByJob, prerequisitesTable) = ZodiacWarrior dictionaryFor jobClass
 
-    val seed = Set(
-      Party(
-        ZodiacWarrior toSolve jobClass,
-        ZodiacWarrior toSolve jobClass,
-        ZodiacWarrior toSolve jobClass,
-        ZodiacWarrior toSolve jobClass
-      )
-    )
-
-    gainExperience(i, seed)
+    gainExperience(i, if (seed.isEmpty) defaultSeed(jobClass) else seed)
   }
 
   @tailrec
@@ -43,4 +34,13 @@ object Main extends App {
       frontier
     }
   }
+
+  private def defaultSeed(job: JobClass) = Set(
+    Party(
+      ZodiacWarrior toSolve job,
+      ZodiacWarrior toSolve job,
+      ZodiacWarrior toSolve job,
+      ZodiacWarrior toSolve job
+    )
+  )
 }
