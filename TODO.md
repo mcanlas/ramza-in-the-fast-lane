@@ -1,6 +1,7 @@
 Next action
 ===========
 
+* research the lack of inter party sorting, using head distance vs min any distance (search for one node), and inter character frontier trimming (if you do not contribute to the head improving, it is not a worthwhile investment)
 
 Miscellaneous
 =============
