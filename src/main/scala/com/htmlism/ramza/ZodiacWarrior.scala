@@ -21,7 +21,7 @@ object ZodiacWarrior {
 
     val indexesByJob = indexesByPrerequisites + (jobClass -> prerequisitesForThisJob.size)
 
-    SolverContext(indexesByJob, prerequisitesTable, sortedJobs)
+    SolverContext(jobClass, indexesByJob, prerequisitesTable, sortedJobs)
   }
 
   def toSolve(jobClass: JobClass) = {
@@ -52,7 +52,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
   }
 
   def availableJobsVector(implicit context: SolverContext) = {
-    val SolverContext(_, prerequisites, _) = context
+    val SolverContext(_, _, prerequisites, _) = context
 
     prerequisites.indices.filter({ i =>
       val prereq = prerequisites(i)
@@ -66,7 +66,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
   def jobPoints(jobIndex: Int) = career(jobIndex)
 
   def distanceFrom(job: Int)(implicit context: SolverContext) = {
-    val SolverContext(_, prerequisites, _) = context
+    val SolverContext(_, _, prerequisites, _) = context
 
     prerequisites(job).indices.map { i =>
       val requiredPoints = jobPointMinima(prerequisites(job)(i) - 2)

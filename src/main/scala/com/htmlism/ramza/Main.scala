@@ -12,7 +12,7 @@ object Main extends App {
 
   @tailrec
   def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit jobClass: JobClass, context: SolverContext): Set[Party] = {
-    val SolverContext(indexesByJob, _, _) = context
+    val SolverContext(_, indexesByJob, _, _) = context
 
     if (i > 0) {
       val frontier = set.flatMap(x => x.gainExperience)
