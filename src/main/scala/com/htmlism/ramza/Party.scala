@@ -20,7 +20,7 @@ case class Party(characters: ZodiacWarrior*) {
     )
   }
 
-  private def gainExperienceByCharacter(parties: List[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit prerequisites: PrerequisiteTable) = {
+  private def gainExperienceByCharacter(parties: List[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
@@ -31,7 +31,7 @@ case class Party(characters: ZodiacWarrior*) {
   }
 
   @tailrec
-  private def gainExperienceRecursively(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)])(implicit prerequisites: PrerequisiteTable): List[Party] = characters.toList match {
+  private def gainExperienceRecursively(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)])(implicit context: SolverContext): List[Party] = characters.toList match {
     case head :: tail => {
       val partiesFromOneCharacter = gainExperienceByCharacter(parties, head)
 
@@ -42,7 +42,7 @@ case class Party(characters: ZodiacWarrior*) {
     }
   }
 
-  def gainExperience(implicit prerequisites: PrerequisiteTable) = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
+  def gainExperience(implicit context: SolverContext) = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
 
-  def anyDistanceFrom(job: Int)(implicit prerequisites: PrerequisiteTable) = characters.map(_.distanceFrom(job)).min
+  def anyDistanceFrom(job: Int)(implicit context: SolverContext) = characters.map(_.distanceFrom(job)).min
 }

@@ -6,7 +6,7 @@ import com.htmlism.ramza.Jobs._
 class PartySpec extends Specification {
   "An empty party" should {
     "yield one solution" in {
-      implicit val (_, prerequisitesTable) = ZodiacWarrior dictionaryFor Squire
+      implicit val context = ZodiacWarrior solveFor Squire
 
       Party().gainExperience.size === 1
     }

@@ -5,9 +5,7 @@ import scala.annotation.tailrec
 import com.htmlism.ramza.ZodiacWarrior._
 
 object ZodiacWarrior {
-  type PrerequisiteTable = Vector[Vector[Int]]
-
-  def dictionaryFor(jobClass: JobClass) = {
+  def solveFor(jobClass: JobClass) = {
     val prerequisitesForThisJob = prerequisites(jobClass)
 
     val indexesByPrerequisites = prerequisites(jobClass).keys.zipWithIndex.toList.toMap
@@ -23,7 +21,7 @@ object ZodiacWarrior {
 
     val indexesByJob = indexesByPrerequisites + (jobClass -> prerequisitesForThisJob.size)
 
-    (indexesByJob, prerequisitesTable)
+    SolverContext(indexesByJob, prerequisitesTable, sortedJobs)
   }
 
   def toSolve(jobClass: JobClass) = {
@@ -41,7 +39,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     ZodiacWarrior(experiencePoints + 10, career = career.updated(jobIndex, currentJp + augmentedJpToGain))
   }
 
-  def withJp(job: JobClass, newJobPoints: Int)(implicit indexesByJob: Map[JobClass, Int]) = copy(career = career.updated(indexesByJob(job), newJobPoints))
+  def withJp(job: JobClass, newJobPoints: Int)(implicit context: SolverContext) = copy(career = career.updated(context.indexesByJob(job), newJobPoints))
 
   def withSharedJp(jobIndex: Int, baseJpToGain: Int) = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
 
@@ -53,17 +51,23 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     case _ => level
   }
 
-  def availableJobsVector(implicit prerequisites: PrerequisiteTable) = prerequisites.indices.filter({ i =>
-    val prereq = prerequisites(i)
+  def availableJobsVector(implicit context: SolverContext) = {
+    val SolverContext(_, prerequisites, _) = context
 
-    prereq.indices.forall({ jobIndex =>
-      jobLevelVector(jobIndex) >= prereq(jobIndex)
+    prerequisites.indices.filter({ i =>
+      val prereq = prerequisites(i)
+
+      prereq.indices.forall({ jobIndex =>
+        jobLevelVector(jobIndex) >= prereq(jobIndex)
+      })
     })
-  })
+  }
 
   def jobPoints(jobIndex: Int) = career(jobIndex)
 
-  def distanceFrom(job: Int)(implicit prerequisites: PrerequisiteTable) = {
+  def distanceFrom(job: Int)(implicit context: SolverContext) = {
+    val SolverContext(_, prerequisites, _) = context
+
     prerequisites(job).indices.map { i =>
       val requiredPoints = jobPointMinima(prerequisites(job)(i) - 2)
 
