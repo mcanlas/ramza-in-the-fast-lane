@@ -4,15 +4,15 @@ import com.htmlism.ramza.Jobs._
 import scala.annotation.tailrec
 
 object Main extends App {
-  def solveFor(implicit jobClass: JobClass, i: Int, seed: Set[Party] = Set.empty) = {
+  def solveFor(jobClass: JobClass, i: Int, seed: Set[Party] = Set.empty) = {
     implicit val context = ZodiacWarrior solveFor jobClass
 
     gainExperience(i, if (seed.isEmpty) defaultSeed(jobClass) else seed)
   }
 
   @tailrec
-  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit jobClass: JobClass, context: SolverContext): Set[Party] = {
-    val SolverContext(_, indexesByJob, _, _) = context
+  def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit context: SolverContext): Set[Party] = {
+    val SolverContext(jobClass, indexesByJob, _, _) = context
 
     if (i > 0) {
       val frontier = set.flatMap(x => x.gainExperience)
