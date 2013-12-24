@@ -11,4 +11,17 @@ class PartySpec extends Specification {
       Party().gainExperience.size === 1
     }
   }
+
+  "Solving for Onion Knight" should {
+    implicit val context = ZodiacWarrior solveFor OnionKnight
+
+    "yield two solutions after one iteration" in {
+      val seed = Party(
+        ZodiacWarrior toSolve OnionKnight,
+        ZodiacWarrior toSolve OnionKnight
+      )
+
+      seed.gainExperience.length === 2
+    }
+  }
 }
