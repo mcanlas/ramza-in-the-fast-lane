@@ -45,6 +45,7 @@ class ZodiacWarriorSpec extends Specification {
 
   "Experience gain" should {
     implicit val SolverContext(_, indexes, table, _) = ZodiacWarrior solveFor Knight
+
     val character = ZodiacWarrior toSolve Knight
     val characterWithExperience = character withExp(0, 2)
 
@@ -54,6 +55,7 @@ class ZodiacWarriorSpec extends Specification {
 
   "Job points gain" should {
     implicit val SolverContext(_, indexes, table, _) = ZodiacWarrior solveFor Knight
+
     val character = ZodiacWarrior toSolve Knight
     val characterWithJobPoints = character withSharedJp(0, 4)
 
