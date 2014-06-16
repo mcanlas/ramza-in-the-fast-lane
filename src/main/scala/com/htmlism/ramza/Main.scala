@@ -1,6 +1,5 @@
 package com.htmlism.ramza
 
-import com.htmlism.ramza.Jobs._
 import scala.annotation.tailrec
 
 object Main extends App {
