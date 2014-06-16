@@ -2,7 +2,7 @@ package com.htmlism.ramza
 
 import scala.annotation.tailrec
 
-object Main extends App {
+object Main {
   def solveFor(jobClass: JobClass, i: Int, seed: Set[Party] = Set.empty) = {
     implicit val context = SolverContext(jobClass)
 
