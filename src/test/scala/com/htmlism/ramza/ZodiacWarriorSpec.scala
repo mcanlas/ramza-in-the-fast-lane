@@ -33,20 +33,20 @@ class ZodiacWarriorSpec extends Specification {
   "Job levels" should {
     implicit val context = SolverContext(Squire)
 
-    "be two for a level two squire solving for knight" in (ZodiacWarrior toSolve Knight withJp (Squire, 200)).jobLevelVector(context.indexesByJob(Squire)) === 2
+    "be two for a level two squire solving for knight" in (ZodiacWarrior(Knight) withJp (Squire, 200)).jobLevelVector(context.indexesByJob(Squire)) === 2
   }
 
   "Available jobs" should {
     implicit val context = SolverContext(Knight)
 
-    "have one when solving for Squire" in (ZodiacWarrior toSolve Knight availableJobsVector).length === 1
-    "have two when solving for Knight" in (ZodiacWarrior toSolve Knight withJp (Squire, 200) availableJobsVector).length === 2
+    "have one when solving for Squire" in (ZodiacWarrior(Knight) availableJobsVector).length === 1
+    "have two when solving for Knight" in (ZodiacWarrior(Knight) withJp (Squire, 200) availableJobsVector).length === 2
   }
 
   "Experience gain" should {
     implicit val SolverContext(_, indexes, table, _) = SolverContext(Knight)
 
-    val character = ZodiacWarrior toSolve Knight
+    val character = ZodiacWarrior(Knight)
     val characterWithExperience = character withExp(0, 2)
 
     "have the correct experience" in { characterWithExperience.experiencePoints === 110 }
@@ -56,7 +56,7 @@ class ZodiacWarriorSpec extends Specification {
   "Job points gain" should {
     implicit val SolverContext(_, indexes, table, _) = SolverContext(Knight)
 
-    val character = ZodiacWarrior toSolve Knight
+    val character = ZodiacWarrior(Knight)
     val characterWithJobPoints = character withSharedJp(0, 4)
 
     "have the correct job points" in { characterWithJobPoints.jobPoints(0) === 1 }

@@ -37,10 +37,10 @@ object Main extends App {
 
   private def defaultSeed(job: JobClass) = Set(
     Party(
-      ZodiacWarrior toSolve job,
-      ZodiacWarrior toSolve job,
-      ZodiacWarrior toSolve job,
-      ZodiacWarrior toSolve job
+      ZodiacWarrior(job),
+      ZodiacWarrior(job),
+      ZodiacWarrior(job),
+      ZodiacWarrior(job)
     )
   )
 }

@@ -3,7 +3,7 @@ package com.htmlism.ramza
 import scala.annotation.tailrec
 
 object ZodiacWarrior {
-  def toSolve(jobClass: JobClass) = {
+  def apply(jobClass: JobClass): ZodiacWarrior = {
     val size = prerequisites(jobClass).size
 
     ZodiacWarrior(career = Vector.fill(size)(0))

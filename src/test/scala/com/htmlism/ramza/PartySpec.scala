@@ -17,8 +17,8 @@ class PartySpec extends Specification {
 
     "yield two solutions after one iteration" in {
       val seed = Party(
-        ZodiacWarrior toSolve OnionKnight,
-        ZodiacWarrior toSolve OnionKnight
+        ZodiacWarrior(OnionKnight),
+        ZodiacWarrior(OnionKnight)
       )
 
       seed.gainExperience.length === 2
