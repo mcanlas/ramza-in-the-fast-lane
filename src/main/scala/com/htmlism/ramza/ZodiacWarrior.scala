@@ -2,7 +2,6 @@ package com.htmlism.ramza
 
 import com.htmlism.ramza.Jobs.JobClass
 import scala.annotation.tailrec
-import com.htmlism.ramza.ZodiacWarrior._
 
 object ZodiacWarrior {
   def solveFor(jobClass: JobClass) = {

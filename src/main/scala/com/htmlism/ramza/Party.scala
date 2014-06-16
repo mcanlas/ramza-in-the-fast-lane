@@ -1,7 +1,6 @@
 package com.htmlism.ramza
 
 import scala.annotation.tailrec
-import com.htmlism.ramza.ZodiacWarrior._
 
 case class Party(characters: ZodiacWarrior*) {
   private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: Int) = {
