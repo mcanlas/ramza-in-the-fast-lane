@@ -3,25 +3,6 @@ package com.htmlism.ramza
 import scala.annotation.tailrec
 
 object ZodiacWarrior {
-  def solveFor(jobClass: JobClass) = {
-    val prerequisitesForThisJob = prerequisites(jobClass)
-
-    val indexesByPrerequisites = prerequisites(jobClass).keys.zipWithIndex.toList.toMap
-    val sortedJobs = indexesByPrerequisites.toList sortBy(_._2) map(_._1)
-
-    val prerequisitesTable = ((sortedJobs :+ jobClass) map {
-      j =>
-        (sortedJobs map {
-          prereq =>
-            prerequisites(j).getOrElse(prereq, 0)
-        }).toVector
-    }).toVector
-
-    val indexesByJob = indexesByPrerequisites + (jobClass -> prerequisitesForThisJob.size)
-
-    SolverContext(jobClass, indexesByJob, prerequisitesTable, sortedJobs)
-  }
-
   def toSolve(jobClass: JobClass) = {
     val size = prerequisites(jobClass).size
 

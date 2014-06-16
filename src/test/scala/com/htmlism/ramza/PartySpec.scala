@@ -6,14 +6,14 @@ import com.htmlism.ramza.Jobs._
 class PartySpec extends Specification {
   "An empty party" should {
     "yield one solution" in {
-      implicit val context = ZodiacWarrior solveFor Squire
+      implicit val context = SolverContext(Squire)
 
       Party().gainExperience.size === 1
     }
   }
 
   "Solving for Onion Knight" should {
-    implicit val context = ZodiacWarrior solveFor OnionKnight
+    implicit val context = SolverContext(OnionKnight)
 
     "yield two solutions after one iteration" in {
       val seed = Party(

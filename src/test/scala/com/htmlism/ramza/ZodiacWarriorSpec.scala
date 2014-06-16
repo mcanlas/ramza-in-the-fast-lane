@@ -11,7 +11,7 @@ class ZodiacWarriorSpec extends Specification {
   }
 
   "Dictionary for Squire" should {
-    val SolverContext(_, indexes, table, _) = ZodiacWarrior solveFor Squire
+    val SolverContext(_, indexes, table, _) = SolverContext(Squire)
     val size = indexes.size
 
     "have one job" in { size must beEqualTo(1) }
@@ -20,7 +20,7 @@ class ZodiacWarriorSpec extends Specification {
   }
 
   "Dictionary for Monk" should {
-    val SolverContext(_, indexes, table, _) = ZodiacWarrior solveFor Monk
+    val SolverContext(_, indexes, table, _) = SolverContext(Monk)
     val size = indexes.size
     val monkRequirements = table(indexes(Monk))
 
@@ -31,20 +31,20 @@ class ZodiacWarriorSpec extends Specification {
   }
 
   "Job levels" should {
-    implicit val context = ZodiacWarrior solveFor Squire
+    implicit val context = SolverContext(Squire)
 
     "be two for a level two squire solving for knight" in (ZodiacWarrior toSolve Knight withJp (Squire, 200)).jobLevelVector(context.indexesByJob(Squire)) === 2
   }
 
   "Available jobs" should {
-    implicit val context = ZodiacWarrior solveFor Knight
+    implicit val context = SolverContext(Knight)
 
     "have one when solving for Squire" in (ZodiacWarrior toSolve Knight availableJobsVector).length === 1
     "have two when solving for Knight" in (ZodiacWarrior toSolve Knight withJp (Squire, 200) availableJobsVector).length === 2
   }
 
   "Experience gain" should {
-    implicit val SolverContext(_, indexes, table, _) = ZodiacWarrior solveFor Knight
+    implicit val SolverContext(_, indexes, table, _) = SolverContext(Knight)
 
     val character = ZodiacWarrior toSolve Knight
     val characterWithExperience = character withExp(0, 2)
@@ -54,7 +54,7 @@ class ZodiacWarriorSpec extends Specification {
   }
 
   "Job points gain" should {
-    implicit val SolverContext(_, indexes, table, _) = ZodiacWarrior solveFor Knight
+    implicit val SolverContext(_, indexes, table, _) = SolverContext(Knight)
 
     val character = ZodiacWarrior toSolve Knight
     val characterWithJobPoints = character withSharedJp(0, 4)

@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 
 object Main extends App {
   def solveFor(jobClass: JobClass, i: Int, seed: Set[Party] = Set.empty) = {
-    implicit val context = ZodiacWarrior solveFor jobClass
+    implicit val context = SolverContext(jobClass)
 
     gainExperience(i, if (seed.isEmpty) defaultSeed(jobClass) else seed)
   }
