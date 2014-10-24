@@ -23,7 +23,7 @@ case class Party(characters: List[ZodiacWarrior]) {
     )
   }
 
-  private def gainExperienceByCharacter(parties: List[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
+  private def gainExperienceByCharacter(parties: Seq[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
@@ -34,7 +34,7 @@ case class Party(characters: List[ZodiacWarrior]) {
   }
 
   @tailrec
-  private def gainExperienceRecursively(parties: List[Party], characters: List[(ZodiacWarrior, Int)])(implicit context: SolverContext): List[Party] = characters match {
+  private def gainExperienceRecursively(parties: Seq[Party], characters: List[(ZodiacWarrior, Int)])(implicit context: SolverContext): Seq[Party] = characters match {
     case head :: tail => {
       val partiesAfterOneCharacter = gainExperienceByCharacter(parties, head)
 
