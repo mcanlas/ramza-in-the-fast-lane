@@ -36,9 +36,9 @@ case class Party(characters: List[ZodiacWarrior]) {
   @tailrec
   private def gainExperienceRecursively(parties: List[Party], characters: Traversable[(ZodiacWarrior, Int)])(implicit context: SolverContext): List[Party] = characters match {
     case head :: tail => {
-      val partiesFromOneCharacter = gainExperienceByCharacter(parties, head)
+      val partiesAfterOneCharacter = gainExperienceByCharacter(parties, head)
 
-      gainExperienceRecursively(partiesFromOneCharacter, tail)
+      gainExperienceRecursively(partiesAfterOneCharacter, tail)
     }
     case Nil => parties.map { p =>
       Party(p.characters.sortBy(_.toStableSortableString))
