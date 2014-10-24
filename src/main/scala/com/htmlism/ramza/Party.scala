@@ -2,7 +2,11 @@ package com.htmlism.ramza
 
 import scala.annotation.tailrec
 
-case class Party(characters: ZodiacWarrior*) {
+object Party {
+  val empty = Party(Nil)
+}
+
+case class Party(characters: List[ZodiacWarrior]) {
   private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: Int) = {
     Party(
       characters.zipWithIndex.map {
@@ -15,7 +19,7 @@ case class Party(characters: ZodiacWarrior*) {
             ally withSharedJp(job, jpToGain)
           }
         }
-      }: _*
+      }
     )
   }
 
@@ -37,7 +41,7 @@ case class Party(characters: ZodiacWarrior*) {
       gainExperienceRecursively(partiesFromOneCharacter, tail)
     }
     case Nil => parties.map { p =>
-      Party(p.characters.sortBy(_.toStableSortableString): _*)
+      Party(p.characters.sortBy(_.toStableSortableString))
     }
   }
 

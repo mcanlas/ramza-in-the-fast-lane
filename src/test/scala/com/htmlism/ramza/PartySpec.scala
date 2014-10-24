@@ -8,7 +8,7 @@ class PartySpec extends Specification {
     "yield one solution" in {
       implicit val context = SolverContext(Squire)
 
-      Party().gainExperience.size === 1
+      Party.empty.gainExperience.size === 1
     }
   }
 
@@ -16,10 +16,10 @@ class PartySpec extends Specification {
     implicit val context = SolverContext(OnionKnight)
 
     "yield two solutions after one iteration" in {
-      val seed = Party(
+      val seed = Party(List(
         ZodiacWarrior(OnionKnight),
         ZodiacWarrior(OnionKnight)
-      )
+      ))
 
       seed.gainExperience.length === 2
     }.pendingUntilFixed
