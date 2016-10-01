@@ -25,7 +25,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
   def level = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
 
   @tailrec
-  final def jobLevelVector(jobIndex: Int, minimumsToCheck: List[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
+  final def jobLevelVector(jobIndex: Int, minimumsToCheck: Seq[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
     case jobPointMinimum :: remainingMinima if career(jobIndex) >= jobPointMinimum => jobLevelVector(jobIndex, remainingMinima, level + 1)
     case _ => level
   }
@@ -57,5 +57,5 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     }.sum
   }
 
-  def toStableSortableString = (experiencePoints :: career.toList).mkString(",")
+  def toStableSortableString = (experiencePoints +: career).mkString(",")
 }

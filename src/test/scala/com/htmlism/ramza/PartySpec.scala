@@ -16,7 +16,7 @@ class PartySpec extends Specification {
     implicit val context = SolverContext(OnionKnight)
 
     "yield two solutions after one iteration" in {
-      val seed = Party(List(
+      val seed = Party(Seq(
         ZodiacWarrior(OnionKnight),
         ZodiacWarrior(OnionKnight)
       ))

@@ -42,7 +42,7 @@ object Main {
   }
 
   private def defaultSeed(job: JobClass) = Set(
-    Party(List(
+    Party(Seq(
       ZodiacWarrior(job),
       ZodiacWarrior(job),
       ZodiacWarrior(job),
