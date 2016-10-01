@@ -3,13 +3,13 @@ package com.htmlism.ramza
 import scala.annotation.tailrec
 
 object Main {
-  def solveFor(jobClass: JobClass, i: Int) = {
+  def solveFor(jobClass: JobClass, i: Int): Set[Party] = {
     implicit val context = SolverContext(jobClass)
 
     gainExperience(i, defaultSeed(jobClass))
   }
 
-  def solveFor(jobClass: JobClass, i: Int, seed: Set[Party]) = {
+  def solveFor(jobClass: JobClass, i: Int, seed: Set[Party]): Set[Party] = {
     implicit val context = SolverContext(jobClass)
 
     gainExperience(i, seed)

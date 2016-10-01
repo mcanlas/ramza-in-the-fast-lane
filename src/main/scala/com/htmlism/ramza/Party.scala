@@ -45,7 +45,7 @@ case class Party(characters: List[ZodiacWarrior]) {
     }
   }
 
-  def gainExperience(implicit context: SolverContext) = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
+  def gainExperience(implicit context: SolverContext): Seq[Party] = gainExperienceRecursively(this :: Nil, characters.zipWithIndex)
 
-  def anyDistanceFrom(job: Int)(implicit context: SolverContext) = characters.map(_.distanceFrom(job)).min
+  def anyDistanceFrom(job: Int)(implicit context: SolverContext): Int = characters.map(_.distanceFrom(job)).min
 }
