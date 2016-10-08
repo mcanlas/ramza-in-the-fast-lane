@@ -11,9 +11,9 @@ package object ramza {
 
   import Jobs._
 
-  val prerequisites = Map(
-    Squire        -> Map[JobClass, Int](),
-    Chemist       -> Map[JobClass, Int](),
+  val prerequisites: Map[JobClass, Map[JobClass, Int]] = Map(
+    Squire        -> Map(),
+    Chemist       -> Map(),
     Knight        -> Map(Squire -> 2),
     Archer        -> Map(Squire -> 2),
     Priest        -> Map(Chemist -> 2),
