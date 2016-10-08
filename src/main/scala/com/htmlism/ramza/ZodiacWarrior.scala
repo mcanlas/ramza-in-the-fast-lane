@@ -29,8 +29,8 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
       experiencePoints / 100
 
   @tailrec
-  final def jobLevelVector(jobIndex: Int, minimumsToCheck: Seq[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
-    case jobPointMinimum :: remainingMinima if career(jobIndex) >= jobPointMinimum => jobLevelVector(jobIndex, remainingMinima, level + 1)
+  final def jobLevel(jobIndex: Int, minimumsToCheck: Seq[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
+    case jobPointMinimum :: remainingMinima if career(jobIndex) >= jobPointMinimum => jobLevel(jobIndex, remainingMinima, level + 1)
     case _ => level
   }
 
@@ -41,7 +41,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
       val prereq = prerequisites(i)
 
       prereq.indices.forall({ jobIndex =>
-        jobLevelVector(jobIndex) >= prereq(jobIndex)
+        jobLevel(jobIndex) >= prereq(jobIndex)
       })
     })
   }
