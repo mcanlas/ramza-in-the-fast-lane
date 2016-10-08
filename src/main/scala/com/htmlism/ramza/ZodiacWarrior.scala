@@ -34,7 +34,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     case _ => level
   }
 
-  def availableJobsVector(implicit context: SolverContext): Seq[Int] = {
+  def availableJobs(implicit context: SolverContext): Seq[Int] = {
     val SolverContext(_, _, prerequisites, _) = context
 
     prerequisites.indices.filter({ i =>

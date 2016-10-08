@@ -39,8 +39,8 @@ class ZodiacWarriorSpec extends Specification {
   "Available jobs" should {
     implicit val context = SolverContext(Knight)
 
-    "have one when solving for Squire" in (ZodiacWarrior(Knight) availableJobsVector).length === 1
-    "have two when solving for Knight" in (ZodiacWarrior(Knight) withJp (Squire, 200) availableJobsVector).length === 2
+    "have one when solving for Squire" in (ZodiacWarrior(Knight) availableJobs).length === 1
+    "have two when solving for Knight" in (ZodiacWarrior(Knight) withJp (Squire, 200) availableJobs).length === 2
   }
 
   "Experience gain" should {
