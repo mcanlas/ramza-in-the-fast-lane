@@ -35,12 +35,14 @@ object Main {
       val frontier = set.flatMap(x => x.gainExperience)
       println(i)
 
-      if (frontier.isEmpty) throw new Exception("hello")
+      if (frontier.isEmpty)
+        throw new Exception("hello")
 
       val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(indexesByJob(jobClass)))
       val trimmedFrontier = frontierByDistance(frontierByDistance.keys.min)
 
-      if (trimmedFrontier.isEmpty) throw new Exception("zoo!!")
+      if (trimmedFrontier.isEmpty)
+        throw new Exception("zoo!!")
 
       println("Frontier size is: " + frontier.size)
       println("Trimmed frontier size is: " + trimmedFrontier.size)
