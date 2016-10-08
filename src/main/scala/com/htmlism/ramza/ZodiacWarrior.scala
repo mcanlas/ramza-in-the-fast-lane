@@ -11,18 +11,18 @@ object ZodiacWarrior {
 }
 
 case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector[Int] = Vector()) {
-  def withExp(jobIndex: Int, baseJpToGain: Int) = {
+  def withExp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = {
     val currentJp = career(jobIndex)
     val augmentedJpToGain = baseJpToGain * 3 / 2
 
     ZodiacWarrior(experiencePoints + 10, career = career.updated(jobIndex, currentJp + augmentedJpToGain))
   }
 
-  def withJp(job: JobClass, newJobPoints: Int)(implicit context: SolverContext) = copy(career = career.updated(context.indexesByJob(job), newJobPoints))
+  def withJp(job: JobClass, newJobPoints: Int)(implicit context: SolverContext): ZodiacWarrior = copy(career = career.updated(context.indexesByJob(job), newJobPoints))
 
-  def withSharedJp(jobIndex: Int, baseJpToGain: Int) = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
+  def withSharedJp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
 
-  def level = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
+  def level: Int = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
 
   @tailrec
   final def jobLevelVector(jobIndex: Int, minimumsToCheck: Seq[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
@@ -30,7 +30,7 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     case _ => level
   }
 
-  def availableJobsVector(implicit context: SolverContext) = {
+  def availableJobsVector(implicit context: SolverContext): Seq[Int] = {
     val SolverContext(_, _, prerequisites, _) = context
 
     prerequisites.indices.filter({ i =>
@@ -42,9 +42,9 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     })
   }
 
-  def jobPoints(jobIndex: Int) = career(jobIndex)
+  def jobPoints(jobIndex: Int): Int = career(jobIndex)
 
-  def distanceFrom(job: Int)(implicit context: SolverContext) = {
+  def distanceFrom(job: Int)(implicit context: SolverContext): Int = {
     val SolverContext(_, _, prerequisites, _) = context
 
     prerequisites(job).indices.map { i =>
@@ -57,5 +57,5 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
     }.sum
   }
 
-  def toStableSortableString = (experiencePoints +: career).mkString(",")
+  def toStableSortableString: String = (experiencePoints +: career).mkString(",")
 }
