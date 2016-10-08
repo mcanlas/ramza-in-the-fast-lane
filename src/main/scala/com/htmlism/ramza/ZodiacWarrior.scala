@@ -6,11 +6,11 @@ object ZodiacWarrior {
   def apply(jobClass: JobClass): ZodiacWarrior = {
     val size = prerequisites(jobClass).size
 
-    ZodiacWarrior(career = Vector.fill(size)(0))
+    ZodiacWarrior(career = IndexedSeq.fill(size)(0))
   }
 }
 
-case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector[Int] = Vector()) {
+case class ZodiacWarrior(experiencePoints: Int = 100, private val career: IndexedSeq[Int] = IndexedSeq()) {
   def withExp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = {
     val currentJp = career(jobIndex)
     val augmentedJpToGain = baseJpToGain * 3 / 2

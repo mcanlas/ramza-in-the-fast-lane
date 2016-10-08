@@ -12,8 +12,8 @@ object SolverContext {
         (sortedJobs map {
           prereq =>
             prerequisites(j).getOrElse(prereq, 0)
-        }).toVector
-    }).toVector
+        }).toIndexedSeq
+    }).toIndexedSeq
 
     val indexesByJob = indexesByPrerequisites + (jobClass -> prerequisitesForThisJob.size)
 
@@ -21,4 +21,4 @@ object SolverContext {
   }
 }
 
-case class SolverContext(solvingFor: JobClass, indexesByJob: Map[JobClass, Int], prerequisites: Vector[Vector[Int]], jobs: Seq[JobClass])
+case class SolverContext(solvingFor: JobClass, indexesByJob: Map[JobClass, Int], prerequisites: IndexedSeq[IndexedSeq[Int]], jobs: Seq[JobClass])
