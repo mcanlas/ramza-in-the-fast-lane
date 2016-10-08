@@ -22,7 +22,11 @@ case class ZodiacWarrior(experiencePoints: Int = 100, private val career: Vector
 
   def withSharedJp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
 
-  def level: Int = if (experiencePoints > 99 * 100) 99 else experiencePoints / 100
+  def level: Int =
+    if (experiencePoints > 99 * 100)
+      99
+    else
+      experiencePoints / 100
 
   @tailrec
   final def jobLevelVector(jobIndex: Int, minimumsToCheck: Seq[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
