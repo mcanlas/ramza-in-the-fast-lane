@@ -13,11 +13,10 @@ case class Party(characters: Seq[ZodiacWarrior]) {
         case (ally, allyIndex) => {
           val jpToGain = 8 + character.jobLevel(job) * 2 + character.level / 4
 
-          if (allyIndex == index) {
+          if (allyIndex == index)
             ally withExp(job, jpToGain)
-          } else {
+          else
             ally withSharedJp(job, jpToGain)
-          }
         }
       }
     )
