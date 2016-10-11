@@ -37,7 +37,7 @@ case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[I
     case _ => level
   }
 
-  def availableJobs(implicit context: SolverContext): Seq[Int] = {
+  def availableJobs(implicit context: SolverContext): TraversableOnce[Int] = {
     val SolverContext(_, _, prerequisites, _) = context
 
     prerequisites.indices.filter { i =>
