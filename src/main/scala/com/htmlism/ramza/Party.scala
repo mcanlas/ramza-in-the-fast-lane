@@ -26,7 +26,7 @@ case class Party(characters: Seq[ZodiacWarrior]) {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
-      character.availableJobs.toSeq.map { j =>
+      character.availableJobs.map { j =>
         p.gainExperienceByJob(character, index, j)
       }
     }
