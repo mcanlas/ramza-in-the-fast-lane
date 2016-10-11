@@ -40,13 +40,13 @@ case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[I
   def availableJobs(implicit context: SolverContext): Seq[Int] = {
     val SolverContext(_, _, prerequisites, _) = context
 
-    prerequisites.indices.filter({ i =>
+    prerequisites.indices.filter { i =>
       val prereq = prerequisites(i)
 
-      prereq.indices.forall({ jobIndex =>
+      prereq.indices.forall { jobIndex =>
         jobLevel(jobIndex) >= prereq(jobIndex)
-      })
-    })
+      }
+    }
   }
 
   def jobPoints(jobIndex: Int): Int = career(jobIndex)
