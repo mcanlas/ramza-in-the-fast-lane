@@ -3,14 +3,16 @@ package com.htmlism.ramza
 import scala.annotation.tailrec
 
 object ZodiacWarrior {
+  val defaultExperience = 100
+
   def apply(jobClass: JobClass): ZodiacWarrior = {
     val size = prerequisites(jobClass).size
 
-    ZodiacWarrior(career = IndexedSeq.fill(size)(0))
+    ZodiacWarrior(defaultExperience, career = IndexedSeq.fill(size)(0))
   }
 }
 
-case class ZodiacWarrior(experiencePoints: Int = 100, private val career: IndexedSeq[Int] = IndexedSeq()) {
+case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[Int] = IndexedSeq()) {
   def withExp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = {
     val currentJp = career(jobIndex)
     val augmentedJpToGain = baseJpToGain * 3 / 2
