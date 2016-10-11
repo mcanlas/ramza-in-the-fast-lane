@@ -4,7 +4,7 @@ object SolverContext {
   def apply(jobClass: JobClass): SolverContext = {
     val prerequisitesForThisJob = prerequisites(jobClass)
 
-    val indexesByPrerequisites = prerequisites(jobClass).keys.zipWithIndex.toSeq.toMap
+    val indexesByPrerequisites = prerequisites(jobClass).keys.zipWithIndex.toMap
     val sortedJobs = indexesByPrerequisites.toSeq sortBy(_._2) map(_._1)
 
     val prerequisitesTable = ((sortedJobs :+ jobClass) map {
