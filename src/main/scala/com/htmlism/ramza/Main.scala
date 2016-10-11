@@ -29,7 +29,7 @@ object Main {
     */
   @tailrec
   def gainExperience(i: Int, set: Set[Party], frontier: Set[Party] = Set.empty)(implicit context: SolverContext): Set[Party] = {
-    val SolverContext(jobClass, indexesByJob, _, _) = context
+    val SolverContext(targetJobClass, indexesByJob, _, _) = context
 
     if (i > 0) {
       val frontier = set.flatMap(_.gainExperience)
@@ -38,7 +38,7 @@ object Main {
       if (frontier.isEmpty)
         throw new Exception("hello")
 
-      val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(indexesByJob(jobClass)))
+      val frontierByDistance = frontier.groupBy(_.anyDistanceFrom(indexesByJob(targetJobClass)))
       val trimmedFrontier = frontierByDistance(frontierByDistance.keys.min)
 
       if (trimmedFrontier.isEmpty)
