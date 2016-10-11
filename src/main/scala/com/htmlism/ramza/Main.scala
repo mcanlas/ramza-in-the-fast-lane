@@ -32,7 +32,7 @@ object Main {
     val SolverContext(jobClass, indexesByJob, _, _) = context
 
     if (i > 0) {
-      val frontier = set.flatMap(x => x.gainExperience)
+      val frontier = set.flatMap(_.gainExperience)
       println(i)
 
       if (frontier.isEmpty)
