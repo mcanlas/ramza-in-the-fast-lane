@@ -20,7 +20,8 @@ case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[I
     ZodiacWarrior(experiencePoints + 10, career = career.updated(jobIndex, currentJp + augmentedJpToGain))
   }
 
-  def withJp(job: JobClass, newJobPoints: Int)(implicit context: SolverContext): ZodiacWarrior = copy(career = career.updated(context.indexesByJob(job), newJobPoints))
+  def withJp(job: JobClass, newJobPoints: Int)(implicit context: SolverContext): ZodiacWarrior =
+    copy(career = career.updated(context.indexesByJob(job), newJobPoints))
 
   def withSharedJp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
 
