@@ -33,15 +33,19 @@ case class Party(characters: Seq[ZodiacWarrior]) {
   }
 
   @tailrec
-  private def gainExperienceRecursively(parties: Seq[Party], characters: Seq[(ZodiacWarrior, Int)])(implicit context: SolverContext): Seq[Party] = characters match {
-    case head :: tail => {
-      val partiesAfterOneCharacter = gainExperienceByCharacter(parties, head)
+  private def gainExperienceRecursively(
+      parties: Seq[Party],
+      characters: Seq[(ZodiacWarrior, Int)])(implicit context: SolverContext): Seq[Party] =
+    characters match {
+      case head :: tail =>
+        val partiesAfterOneCharacter = gainExperienceByCharacter(parties, head)
 
-      gainExperienceRecursively(partiesAfterOneCharacter, tail)
-    }
-    case Nil => parties.map { p =>
-      Party(p.characters.sortBy(_.toStableSortableString))
-    }
+        gainExperienceRecursively(partiesAfterOneCharacter, tail)
+
+      case Nil =>
+        parties.map { p =>
+          Party(p.characters.sortBy(_.toStableSortableString))
+        }
   }
 
   def gainExperience(implicit context: SolverContext): Seq[Party] = gainExperienceRecursively(Seq(this), characters.zipWithIndex)
