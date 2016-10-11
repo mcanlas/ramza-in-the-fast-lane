@@ -43,9 +43,11 @@ case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[I
     prerequisites.indices.filter { i =>
       val prereq = prerequisites(i)
 
-      prereq.indices.forall { jobIndex =>
+      val satisfiesJobMinima = prereq.indices.forall { jobIndex =>
         jobLevel(jobIndex) >= prereq(jobIndex)
       }
+
+      satisfiesJobMinima
     }
   }
 
