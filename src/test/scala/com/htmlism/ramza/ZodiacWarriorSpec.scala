@@ -4,12 +4,6 @@ import org.specs2.mutable.Specification
 import com.htmlism.ramza.Jobs._
 
 class ZodiacWarriorSpec extends Specification {
-  "Zodiac Warrior" should {
-    "start with 100 experience" in {
-      ZodiacWarrior().experiencePoints must beEqualTo(100)
-    }
-  }
-
   "Dictionary for Squire" should {
     val SolverContext(_, indexes, table, _) = SolverContext(Squire)
     val size = indexes.size
@@ -39,8 +33,8 @@ class ZodiacWarriorSpec extends Specification {
   "Available jobs" should {
     implicit val context = SolverContext(Knight)
 
-    "have one when solving for Squire" in (ZodiacWarrior(Knight) availableJobs).length === 1
-    "have two when solving for Knight" in (ZodiacWarrior(Knight) withJp (Squire, 200) availableJobs).length === 2
+    "have one when solving for Squire" in (ZodiacWarrior(Knight) availableJobs).size === 1
+    "have two when solving for Knight" in (ZodiacWarrior(Knight) withJp (Squire, 200) availableJobs).size === 2
   }
 
   "Experience gain" should {
