@@ -21,7 +21,7 @@ class PartySpec extends Specification {
         ZodiacWarrior(OnionKnight)
       ))
 
-      seed.gainExperience.length === 2
+      seed.gainExperience.size === 2
     }.pendingUntilFixed
   }
 }
