@@ -1,6 +1,7 @@
 Next action
 ===========
 
+* limit frontier size by always sorting the warriors
 * add distance to next level up as a secondary heuristic to cut down on graph explosion during jp grinding
 * research the lack of inter party sorting, using head distance vs min any distance (search for one node), and inter character frontier trimming (if you do not contribute to the head improving, it is not a worthwhile investment)
 
