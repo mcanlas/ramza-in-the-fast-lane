@@ -4,6 +4,7 @@ import scala.annotation.tailrec
 
 object ZodiacWarrior {
   val defaultExperience = 100
+  val maximumLevel = 99
 
   def apply(jobClass: JobClass): ZodiacWarrior = {
     val size = prerequisites(jobClass).size
@@ -26,8 +27,8 @@ case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[I
   def withSharedJp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = copy(career = career.updated(jobIndex, career(jobIndex) + baseJpToGain / 4))
 
   def level: Int =
-    if (experiencePoints > 99 * 100)
-      99
+    if (experiencePoints > ZodiacWarrior.maximumLevel * 100)
+      ZodiacWarrior.maximumLevel
     else
       experiencePoints / 100
 
