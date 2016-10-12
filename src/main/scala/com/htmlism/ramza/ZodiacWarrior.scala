@@ -13,7 +13,7 @@ object ZodiacWarrior {
   }
 }
 
-case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[Int] = IndexedSeq()) {
+case class ZodiacWarrior(experiencePoints: Int, career: IndexedSeq[Int]) {
   def withExp(jobIndex: Int, baseJpToGain: Int): ZodiacWarrior = {
     val currentJp = career(jobIndex)
     val augmentedJpToGain = baseJpToGain * 3 / 2
