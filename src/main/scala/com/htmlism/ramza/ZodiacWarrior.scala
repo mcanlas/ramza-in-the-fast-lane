@@ -65,6 +65,4 @@ case class ZodiacWarrior(experiencePoints: Int, private val career: IndexedSeq[I
         0
     }.sum
   }
-
-  def toStableSortableString: String = (experiencePoints +: career).mkString(",")
 }

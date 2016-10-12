@@ -43,9 +43,7 @@ case class Party(characters: Seq[ZodiacWarrior]) {
         gainExperienceRecursively(partiesAfterOneCharacter, tail)
 
       case Nil =>
-        parties.map { p =>
-          Party(p.characters.sortBy(_.toStableSortableString))
-        }
+        parties
   }
 
   def gainExperience(implicit context: SolverContext): Seq[Party] = gainExperienceRecursively(Seq(this), characters.zipWithIndex)
