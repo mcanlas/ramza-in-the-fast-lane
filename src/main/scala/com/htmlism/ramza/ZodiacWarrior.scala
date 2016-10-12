@@ -1,7 +1,5 @@
 package com.htmlism.ramza
 
-import scala.annotation.tailrec
-
 object ZodiacWarrior {
   val defaultExperience = 100
   val maximumLevel = 99
@@ -32,12 +30,6 @@ case class ZodiacWarrior(experiencePoints: Int, career: IndexedSeq[Int]) {
     else
       experiencePoints / 100
 
-  @tailrec
-  final def jobLevel(jobIndex: Int, minimumsToCheck: Seq[Int] = jobPointMinima, level: Int = 1): Int = minimumsToCheck match {
-    case jobPointMinimum :: remainingMinima if career(jobIndex) >= jobPointMinimum => jobLevel(jobIndex, remainingMinima, level + 1)
-    case _ => level
-  }
-
   def availableJobs(implicit context: SolverContext): TraversableOnce[Int] = {
     val SolverContext(_, _, prerequisites, _) = context
 
@@ -45,7 +37,7 @@ case class ZodiacWarrior(experiencePoints: Int, career: IndexedSeq[Int]) {
       val prereq = prerequisites(i)
 
       val satisfiesJobMinima = prereq.indices.forall { jobIndex =>
-        jobLevel(jobIndex) >= prereq(jobIndex)
+        jobLevel(career(jobIndex)) >= prereq(jobIndex)
       }
 
       satisfiesJobMinima

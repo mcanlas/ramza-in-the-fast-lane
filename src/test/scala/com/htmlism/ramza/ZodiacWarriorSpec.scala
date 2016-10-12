@@ -24,12 +24,6 @@ class ZodiacWarriorSpec extends Specification {
     "require 2 for Squire" in { monkRequirements(indexes(Squire)) === 2 }
   }
 
-  "Job levels" should {
-    implicit val context = SolverContext(Squire)
-
-    "be two for a level two squire solving for knight" in (ZodiacWarrior(Knight) withJp (Squire, 200)).jobLevel(context.indexesByJob(Squire)) === 2
-  }
-
   "Available jobs" should {
     implicit val context = SolverContext(Knight)
 

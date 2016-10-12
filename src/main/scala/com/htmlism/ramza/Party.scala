@@ -9,7 +9,7 @@ case class Party(characters: Iterable[ZodiacWarrior]) {
     Party(
       characters.iterator.zipWithIndex.map {
         case (ally, allyIndex) => {
-          val jpToGain = 8 + character.jobLevel(job) * 2 + character.level / 4
+          val jpToGain = 8 + jobLevel(character.career(job)) * 2 + character.level / 4
 
           if (allyIndex == index)
             ally withExp(job, jpToGain)
