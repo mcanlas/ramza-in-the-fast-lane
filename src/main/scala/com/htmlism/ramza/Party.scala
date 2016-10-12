@@ -1,7 +1,5 @@
 package com.htmlism.ramza
 
-import scala.annotation.tailrec
-
 object Party {
   val empty = Party(Nil)
 }
@@ -32,19 +30,10 @@ case class Party(characters: Seq[ZodiacWarrior]) {
     }
   }
 
-  @tailrec
   private def gainExperienceRecursively(
       parties: Seq[Party],
       charactersToProcess: Seq[(ZodiacWarrior, Int)])(implicit context: SolverContext): Seq[Party] =
-    charactersToProcess match {
-      case head :: tail =>
-        val partiesAfterOneCharacter = gainExperienceByCharacter(parties, head)
-
-        gainExperienceRecursively(partiesAfterOneCharacter, tail)
-
-      case Nil =>
-        parties
-  }
+    charactersToProcess.foldLeft(parties)((ps, c) => gainExperienceByCharacter(ps, c))
 
   def gainExperience(implicit context: SolverContext): Seq[Party] = gainExperienceRecursively(Seq(this), characters.zipWithIndex)
 
