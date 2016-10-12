@@ -4,10 +4,10 @@ object Party {
   val empty = Party(Nil)
 }
 
-case class Party(characters: Seq[ZodiacWarrior]) {
+case class Party(characters: Iterable[ZodiacWarrior]) {
   private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: Int) = {
     Party(
-      characters.zipWithIndex.map {
+      characters.iterator.zipWithIndex.map {
         case (ally, allyIndex) => {
           val jpToGain = 8 + character.jobLevel(job) * 2 + character.level / 4
 
@@ -16,11 +16,11 @@ case class Party(characters: Seq[ZodiacWarrior]) {
           else
             ally withSharedJp(job, jpToGain)
         }
-      }
+      }.toSeq
     )
   }
 
-  private def gainExperienceByCharacter(parties: Seq[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
+  private def gainExperienceByCharacter(parties: TraversableOnce[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
@@ -31,11 +31,11 @@ case class Party(characters: Seq[ZodiacWarrior]) {
   }
 
   private def gainExperienceRecursively(
-      parties: Seq[Party],
-      charactersToProcess: Seq[(ZodiacWarrior, Int)])(implicit context: SolverContext): Seq[Party] =
+      parties: TraversableOnce[Party],
+      charactersToProcess: TraversableOnce[(ZodiacWarrior, Int)])(implicit context: SolverContext): TraversableOnce[Party] =
     charactersToProcess.foldLeft(parties)((ps, c) => gainExperienceByCharacter(ps, c))
 
-  def gainExperience(implicit context: SolverContext): Seq[Party] = gainExperienceRecursively(Seq(this), characters.zipWithIndex)
+  def gainExperience(implicit context: SolverContext): TraversableOnce[Party] = gainExperienceRecursively(Seq(this), characters.zipWithIndex)
 
   def anyDistanceFrom(job: Int)(implicit context: SolverContext): Int = characters.map(_.distanceFrom(job)).min
 }
