@@ -35,4 +35,7 @@ package object ramza {
     OnionKnight   -> Map(Squire -> 6, Chemist -> 6),
     DarkKnight    -> Map(Wizard -> 8, Archer -> 4, Samurai -> 8, Thief -> 5, Geomancer -> 8, Squire -> 8, Ninja -> 8, Monk -> 5, Dragoon -> 8, Knight -> 8, Chemist -> 8)
   )
+
+  def jobLevel(jobPoints: Int, minima: Seq[Int] = jobPointMinima): Int =
+    jobPointMinima.iterator.takeWhile(min => jobPoints >= min).size + 1
 }
