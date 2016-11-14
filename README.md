@@ -11,7 +11,6 @@ Testing
 Generating code
 ---------------
 
-    $ cat levels.txt | ./levels.pl
     $ cat jobs.txt | ./jobs.pl
 
 Colophon
