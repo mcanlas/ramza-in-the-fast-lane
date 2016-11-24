@@ -1,7 +1,6 @@
 package com.htmlism.ramza
 
 import org.specs2.mutable.Specification
-import com.htmlism.ramza.Jobs._
 
 class ZodiacWarriorSpec extends Specification {
   "Dictionary for Squire" should {

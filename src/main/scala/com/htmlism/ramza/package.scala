@@ -1,15 +1,32 @@
 package com.htmlism
 
 package object ramza {
-  type JobClass = Jobs.Value
-
   val jobPointMinima = Seq(200, 400, 700, 1100, 1600, 2200, 3000)
 
-  object Jobs extends Enumeration {
-    val Squire, Knight, Monk, Geomancer, Archer, Thief, Dragoon, Ninja, Samurai, Dancer, Chemist, Priest, Wizard, Mystic, TimeMage, Arithmetician, Orator, Summoner, Bard, OnionKnight, Mime, DarkKnight = Value
-  }
+  sealed trait JobClass
 
-  import Jobs._
+  object Squire extends JobClass
+  object Knight extends JobClass
+  object Monk extends JobClass
+  object Geomancer extends JobClass
+  object Archer extends JobClass
+  object Thief extends JobClass
+  object Dragoon extends JobClass
+  object Ninja extends JobClass
+  object Samurai extends JobClass
+  object Dancer extends JobClass
+  object Chemist extends JobClass
+  object Priest extends JobClass
+  object Wizard extends JobClass
+  object Mystic extends JobClass
+  object TimeMage extends JobClass
+  object Arithmetician extends JobClass
+  object Orator extends JobClass
+  object Summoner extends JobClass
+  object Bard extends JobClass
+  object OnionKnight extends JobClass
+  object Mime extends JobClass
+  object DarkKnight extends JobClass
 
   val prerequisites: Map[JobClass, Map[JobClass, Int]] = Map(
     Squire        -> Map(),
