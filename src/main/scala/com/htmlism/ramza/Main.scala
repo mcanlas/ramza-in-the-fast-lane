@@ -55,7 +55,7 @@ object Main {
     }
   }
 
-  private def defaultSeed(job: JobClass) = Set(
+  private[this] def defaultSeed(job: JobClass) = Set(
     Party(Seq(
       ZodiacWarrior(job),
       ZodiacWarrior(job),

@@ -5,7 +5,7 @@ object Party {
 }
 
 case class Party(characters: Iterable[ZodiacWarrior]) {
-  private def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: Int) = {
+  def gainExperienceByJob(character: ZodiacWarrior, index: Int, job: Int): Party = {
     Party(
       characters.iterator.zipWithIndex.map {
         case (ally, allyIndex) => {
@@ -20,7 +20,7 @@ case class Party(characters: Iterable[ZodiacWarrior]) {
     )
   }
 
-  private def gainExperienceByCharacter(parties: TraversableOnce[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
+  private[this] def gainExperienceByCharacter(parties: TraversableOnce[Party], characterWithIndex: (ZodiacWarrior, Int))(implicit context: SolverContext) = {
     val (character, index) = characterWithIndex
 
     parties.flatMap { p =>
@@ -30,7 +30,7 @@ case class Party(characters: Iterable[ZodiacWarrior]) {
     }
   }
 
-  private def gainExperienceRecursively(
+  private[this] def gainExperienceRecursively(
       parties: TraversableOnce[Party],
       charactersToProcess: TraversableOnce[(ZodiacWarrior, Int)])(implicit context: SolverContext): TraversableOnce[Party] =
     charactersToProcess.foldLeft(parties)((ps, c) => gainExperienceByCharacter(ps, c))
