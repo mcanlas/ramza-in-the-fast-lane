@@ -1,6 +1,5 @@
 initialCommands in console := """
   import com.htmlism.ramza._
-  import com.htmlism.ramza.Jobs._
 """
 
 scalaVersion := "2.12.1"
